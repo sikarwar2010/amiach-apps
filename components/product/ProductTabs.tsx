@@ -2,14 +2,25 @@
 
 import { useState } from "react";
 import { Truck } from "lucide-react";
-import type { InventoryLot, Seller } from "@/lib/types";
-import { shippingLabels } from "@/lib/labels";
-import { formatCurrency, formatNumber, cn } from "@/lib/utils";
+import type { MaterialListing, Supplier } from "@/lib/types";
+import { logisticsLabels, unitLabels } from "@/lib/labels";
+import { formatNumber } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
-const tabs = ["Description", "Manifest", "Condition", "Shipping", "Seller Info"] as const;
+const tabs = ["Description", "Specifications", "Condition", "Shipping", "Supplier Info"] as const;
 
-export function ProductTabs({ listing, seller }: { listing: InventoryLot; seller?: Seller }) {
+export function ProductTabs({ listing, supplier }: { listing: MaterialListing; supplier?: Supplier }) {
   const [tab, setTab] = useState<(typeof tabs)[number]>("Description");
+
+  const detailRows: { label: string; value?: string }[] = [
+    { label: "Dimensions", value: listing.dimensions },
+    { label: "Material", value: listing.material },
+    { label: "Finish", value: listing.finish },
+    { label: "Color", value: listing.color },
+    { label: "Packaging", value: listing.packaging },
+    { label: "Quantity Available", value: `${formatNumber(listing.quantity)} ${unitLabels[listing.unit]}` },
+    { label: "Minimum Order Quantity", value: `${formatNumber(listing.minOrderQuantity)} ${unitLabels[listing.unit]}` },
+  ].filter((row) => row.value);
 
   return (
     <div className="rounded-3xl border border-ink-100 bg-white">
@@ -25,7 +36,7 @@ export function ProductTabs({ listing, seller }: { listing: InventoryLot; seller
           >
             {t}
             {tab === t && (
-              <span className="absolute inset-x-3 -bottom-px h-0.5 rounded-full bg-brand-600" />
+              <span className="absolute inset-x-3 -bottom-px h-0.5 rounded-full bg-accent-500" />
             )}
           </button>
         ))}
@@ -36,82 +47,71 @@ export function ProductTabs({ listing, seller }: { listing: InventoryLot; seller
           <p className="text-sm leading-relaxed text-ink-600">{listing.description}</p>
         )}
 
-        {tab === "Manifest" && (
+        {tab === "Specifications" && (
           <div className="overflow-x-auto">
-            {listing.manifest && listing.manifest.length > 0 ? (
-              <table className="w-full min-w-[480px] text-left text-sm">
-                <thead>
-                  <tr className="border-b border-ink-100 text-xs uppercase tracking-wide text-ink-400">
-                    <th className="py-2 font-medium">SKU</th>
-                    <th className="py-2 font-medium">Description</th>
-                    <th className="py-2 font-medium">Qty</th>
-                    <th className="py-2 font-medium">Unit Retail</th>
+            <table className="w-full min-w-[420px] text-left text-sm">
+              <tbody className="divide-y divide-ink-100">
+                {detailRows.map((row) => (
+                  <tr key={row.label}>
+                    <td className="py-3 pr-6 font-medium text-ink-500">{row.label}</td>
+                    <td className="py-3 text-ink-800">{row.value}</td>
                   </tr>
-                </thead>
-                <tbody className="divide-y divide-ink-100">
-                  {listing.manifest.map((line) => (
-                    <tr key={line.sku}>
-                      <td className="py-3 font-mono text-xs text-ink-500">{line.sku}</td>
-                      <td className="py-3 font-medium text-ink-800">{line.description}</td>
-                      <td className="py-3 text-ink-600">{formatNumber(line.quantity)}</td>
-                      <td className="py-3 text-ink-600">{formatCurrency(line.unitRetail)}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            ) : (
-              <p className="text-sm text-ink-500">
-                A full SKU-level manifest is available after requesting access to
-                this lot.
-              </p>
-            )}
+                ))}
+                {listing.specifications.map((spec) => (
+                  <tr key={spec.label}>
+                    <td className="py-3 pr-6 font-medium text-ink-500">{spec.label}</td>
+                    <td className="py-3 text-ink-800">{spec.value}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         )}
 
         {tab === "Condition" && (
           <p className="text-sm leading-relaxed text-ink-600">
             {listing.conditionNotes ??
-              "Units are graded according to Lotwise's standard condition framework. Contact the seller for a full condition report."}
+              "This listing follows MaalGodaam's standard condition framework. Contact the supplier for a full condition report."}
           </p>
         )}
 
         {tab === "Shipping" && (
           <div className="flex flex-col gap-3">
-            {listing.shippingMethods.map((method) => (
+            {listing.logisticsMethods.map((method) => (
               <div
                 key={method}
                 className="flex items-center gap-2.5 rounded-xl bg-ink-50 px-3.5 py-3 text-sm text-ink-700"
               >
                 <Truck size={16} className="text-ink-400" />
-                {shippingLabels[method]}
+                {logisticsLabels[method]}
               </div>
             ))}
           </div>
         )}
 
-        {tab === "Seller Info" && seller && (
+        {tab === "Supplier Info" && supplier && (
           <div className="flex flex-col gap-2 text-sm text-ink-600">
-            <p>{seller.description ?? `${seller.name} is a verified seller on Lotwise.`}</p>
+            <p>{supplier.description ?? `${supplier.name} is a verified supplier on MaalGodaam.com.`}</p>
             <div className="mt-2 grid grid-cols-2 gap-3 sm:grid-cols-4">
               <div>
                 <div className="text-lg font-extrabold text-ink-900">
-                  {formatNumber(seller.activeListings)}
+                  {formatNumber(supplier.activeListings)}
                 </div>
                 <div className="text-xs text-ink-500">Active Listings</div>
               </div>
               <div>
-                <div className="text-lg font-extrabold text-ink-900">{seller.rating.toFixed(1)}</div>
+                <div className="text-lg font-extrabold text-ink-900">{supplier.rating.toFixed(1)}</div>
                 <div className="text-xs text-ink-500">Rating</div>
               </div>
               <div>
-                <div className="text-lg font-extrabold text-ink-900">{seller.responseRate}%</div>
+                <div className="text-lg font-extrabold text-ink-900">{supplier.responseRate}%</div>
                 <div className="text-xs text-ink-500">Response Rate</div>
               </div>
               <div>
                 <div className="text-lg font-extrabold text-ink-900">
-                  {new Date(seller.memberSince).getFullYear()}
+                  {supplier.yearsActive ? `${supplier.yearsActive} yrs` : "—"}
                 </div>
-                <div className="text-xs text-ink-500">Member Since</div>
+                <div className="text-xs text-ink-500">Experience</div>
               </div>
             </div>
           </div>

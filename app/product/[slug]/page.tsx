@@ -6,7 +6,7 @@ import {
   getListingById,
   getLocationById,
   getRelatedListings,
-  getSellerById,
+  getSupplierById,
   listings,
 } from "@/lib/mock-data";
 import { conditionLabels } from "@/lib/labels";
@@ -14,7 +14,7 @@ import { ImageGallery } from "@/components/product/ImageGallery";
 import { ProductInfo } from "@/components/product/ProductInfo";
 import { PricingPanel } from "@/components/product/PricingPanel";
 import { ProductTabs } from "@/components/product/ProductTabs";
-import { SimilarLots } from "@/components/product/SimilarLots";
+import { SimilarMaterials } from "@/components/product/SimilarMaterials";
 import { Footer } from "@/components/layout/Footer";
 
 export function generateStaticParams() {
@@ -34,7 +34,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   const listing = getListingById(params.slug);
   if (!listing) notFound();
 
-  const seller = getSellerById(listing.sellerId);
+  const supplier = getSupplierById(listing.supplierId);
   const location = getLocationById(listing.locationId);
   const related = getRelatedListings(listing);
 
@@ -45,7 +45,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
           <nav className="mb-5 flex items-center gap-1.5 text-xs text-ink-400">
             <Link href="/" className="hover:text-ink-700">Home</Link>
             <ChevronRight size={12} />
-            <Link href="/marketplace" className="hover:text-ink-700">Marketplace</Link>
+            <Link href="/materials" className="hover:text-ink-700">Materials</Link>
             <ChevronRight size={12} />
             <span className="text-ink-600">{conditionLabels[listing.condition]}</span>
           </nav>
@@ -54,17 +54,17 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             <ImageGallery images={listing.images} title={listing.title} />
 
             <div className="flex flex-col gap-6">
-              <ProductInfo listing={listing} seller={seller} location={location} />
+              <ProductInfo listing={listing} supplier={supplier} location={location} />
               <PricingPanel listing={listing} />
             </div>
           </div>
 
           <div className="mt-12">
-            <ProductTabs listing={listing} seller={seller} />
+            <ProductTabs listing={listing} supplier={supplier} />
           </div>
 
           <div className="mt-14">
-            <SimilarLots listings={related} />
+            <SimilarMaterials listings={related} />
           </div>
         </div>
       </main>

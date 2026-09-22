@@ -1,33 +1,59 @@
-import type { ListingCondition, InventoryLot, ShippingMethod } from "./types";
+import type { ConditionType, DealType, MaterialUnit, LogisticsMethod } from "./types";
 
-export const conditionLabels: Record<ListingCondition, string> = {
-  new: "New",
-  "open-box": "Open Box",
-  refurbished: "Refurbished",
-  "grade-a": "Grade A",
-  "grade-b": "Grade B",
-  "grade-c": "Grade C",
-  "customer-returns": "Customer Returns",
-  mixed: "Mixed Condition",
+export const conditionLabels: Record<ConditionType, string> = {
+  surplus: "Surplus",
+  overstock: "Overstock",
+  excess: "Excess Inventory",
+  discontinued: "Discontinued",
+  clearance: "Clearance",
+  "customer-return": "Customer Return",
+  "display-stock": "Display Stock",
+  "factory-stock": "Factory Stock",
 };
 
-export const lotSizeLabels: Record<InventoryLot["lotSize"], string> = {
-  "single-pallet": "Single Pallet",
-  "multi-pallet": "Multi-Pallet",
-  truckload: "Truckload",
-  "case-pack": "Case Pack",
-  unit: "Unit Lot",
+export const conditionTone: Record<ConditionType, "neutral" | "brand" | "accent"> = {
+  surplus: "brand",
+  overstock: "neutral",
+  excess: "neutral",
+  discontinued: "accent",
+  clearance: "accent",
+  "customer-return": "neutral",
+  "display-stock": "neutral",
+  "factory-stock": "brand",
 };
 
-export const shippingLabels: Record<ShippingMethod, string> = {
-  freight: "Freight",
-  ltl: "LTL Freight",
-  parcel: "Parcel",
-  "local-pickup": "Local Pickup",
-};
-
-export const saleFormatLabels: Record<InventoryLot["saleFormat"], string> = {
-  auction: "Auction",
+export const dealTypeLabels: Record<DealType, string> = {
   "buy-now": "Buy Now",
-  quote: "Request Quote",
+  "request-quote": "Request Quote",
+  "bulk-deal": "Bulk Deal",
+  "contact-supplier": "Contact Supplier",
+};
+
+export const unitLabels: Record<MaterialUnit, string> = {
+  "sq-ft": "sq.ft",
+  piece: "pieces",
+  box: "boxes",
+  set: "sets",
+  "running-ft": "running ft",
+  sheet: "sheets",
+  roll: "rolls",
+  unit: "units",
+};
+
+export const unitLabelSingular: Record<MaterialUnit, string> = {
+  "sq-ft": "sq.ft",
+  piece: "piece",
+  box: "box",
+  set: "set",
+  "running-ft": "running ft",
+  sheet: "sheet",
+  roll: "roll",
+  unit: "unit",
+};
+
+export const logisticsLabels: Record<LogisticsMethod, string> = {
+  "transport-arranged": "Transport Arranged",
+  "self-pickup": "Self Pickup",
+  freight: "Freight",
+  "local-delivery": "Local Delivery",
 };

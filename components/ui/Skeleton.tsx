@@ -4,7 +4,7 @@ export function Skeleton({ className }: { className?: string }) {
   return <div className={cn("skeleton rounded-2xl", className)} />;
 }
 
-export function InventoryCardSkeleton() {
+export function MaterialCardSkeleton() {
   return (
     <div className="flex flex-col overflow-hidden rounded-3xl bg-white ring-1 ring-inset ring-ink-100">
       <Skeleton className="aspect-[4/3] w-full rounded-none" />

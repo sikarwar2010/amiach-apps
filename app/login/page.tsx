@@ -9,7 +9,7 @@ export default function LoginPage() {
   return (
     <AuthCard
       title="Welcome back"
-      subtitle="Sign in to bid, buy and manage your inventory sourcing."
+      subtitle="Sign in to buy, request quotes and manage your material sourcing."
       footer={{ text: "Don't have an account?", linkLabel: "Create one", href: "/register" }}
     >
       <form className="flex flex-col gap-4">

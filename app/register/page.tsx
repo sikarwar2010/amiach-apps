@@ -9,16 +9,16 @@ export default function RegisterPage() {
   return (
     <AuthCard
       title="Create your account"
-      subtitle="Join a verified B2B network of surplus inventory buyers and sellers."
+      subtitle="Join a verified network of surplus material buyers and suppliers across India."
       footer={{ text: "Already have an account?", linkLabel: "Sign in", href: "/login" }}
     >
       <form className="flex flex-col gap-4">
-        <AuthField label="Company Name" placeholder="Acme Retail Group" />
+        <AuthField label="Company Name" placeholder="Acme Builders Pvt. Ltd." />
         <AuthField label="Business Email" type="email" placeholder="you@company.com" />
         <AuthField label="Password" type="password" placeholder="Create a password" />
         <label className="flex items-start gap-2 text-xs text-ink-500">
           <input type="checkbox" className="mt-0.5" />
-          I agree to the Terms of Service and Privacy Policy.
+          I agree to the Terms &amp; Conditions and Privacy Policy.
         </label>
         <Button type="submit" size="lg" className="mt-1">
           <UserPlus size={17} /> Create Account

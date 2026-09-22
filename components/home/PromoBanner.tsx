@@ -6,32 +6,30 @@ export function PromoBanner() {
   return (
     <section className="py-8 sm:py-10">
       <div className="container-page">
-        <div className="relative overflow-hidden rounded-4xl">
+        <div className="relative overflow-hidden rounded-4xl bg-brand-950">
           <div className="relative aspect-[16/9] w-full sm:aspect-[21/9]">
             <Image
-              src="https://picsum.photos/seed/lw-promo-pallets/1600/900"
-              alt="Bulk pallets of inventory staged for resale"
+              src="https://images.unsplash.com/photo-1488972685288-c3fd157d7c7a?w=1600&h=900&fit=crop&auto=format&q=80"
+              alt="Architectural interior built with quality surplus materials"
               fill
               sizes="100vw"
-              className="object-cover"
+              className="object-cover opacity-45 mix-blend-luminosity"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-ink-950/85 via-ink-950/50 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-brand-950 via-brand-950/85 to-brand-950/40" />
           </div>
           <div className="absolute inset-0 flex items-center">
             <div className="max-w-lg px-6 sm:px-12">
               <h2 className="text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl">
-                Buy More.
+                More Value.
                 <br />
-                Save More.
-                <br />
-                Grow Faster.
+                A Better Tomorrow.
               </h2>
-              <p className="mt-4 max-w-sm text-white/75">
-                Unlock bulk inventory opportunities from trusted suppliers and
-                strengthen your margins on every lot.
+              <p className="mt-4 max-w-sm text-white/70">
+                Build with quality surplus materials that are better for your
+                budget and better for the planet.
               </p>
-              <Button href="/marketplace?lotSize=truckload" size="lg" className="mt-6">
-                Explore Bulk Deals
+              <Button href="/materials" size="lg" className="mt-6">
+                Explore Now
                 <ArrowRight size={18} />
               </Button>
             </div>

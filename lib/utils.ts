@@ -6,30 +6,40 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function formatCurrency(value: number): string {
-  if (value >= 1_000_000) {
-    return `$${(value / 1_000_000).toFixed(value % 1_000_000 === 0 ? 0 : 1)}M`;
-  }
-  return new Intl.NumberFormat("en-US", {
+  return new Intl.NumberFormat("en-IN", {
     style: "currency",
     currency: "INR",
     maximumFractionDigits: 0,
   }).format(value);
 }
 
+// Indian numbering: lakh (L) above 1,00,000 and crore (Cr) above 1,00,00,000.
+export function formatCompactCurrency(value: number): string {
+  if (value >= 1_00_00_000) {
+    const cr = value / 1_00_00_000;
+    return `₹${cr % 1 === 0 ? cr.toFixed(0) : cr.toFixed(1)} Cr`;
+  }
+  if (value >= 1_00_000) {
+    const lakh = value / 1_00_000;
+    return `₹${lakh % 1 === 0 ? lakh.toFixed(0) : lakh.toFixed(1)} L`;
+  }
+  return formatCurrency(value);
+}
+
 export function formatNumber(value: number): string {
-  return new Intl.NumberFormat("en-US").format(value);
+  return new Intl.NumberFormat("en-IN").format(value);
 }
 
 export function formatCompactNumber(value: number): string {
-  return new Intl.NumberFormat("en-US", {
+  return new Intl.NumberFormat("en-IN", {
     notation: "compact",
     maximumFractionDigits: 1,
   }).format(value);
 }
 
-export function savingsPercent(retail: number, price: number): number {
-  if (retail <= 0) return 0;
-  return Math.round(((retail - price) / retail) * 100);
+export function savingsPercent(marketValue: number, price: number): number {
+  if (marketValue <= 0) return 0;
+  return Math.round(((marketValue - price) / marketValue) * 100);
 }
 
 export function slugify(value: string): string {

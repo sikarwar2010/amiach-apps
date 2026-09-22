@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { marketplaceStats } from "@/lib/mock-data";
-import { formatCompactNumber, formatCurrency } from "@/lib/utils";
-import { TrustSection } from "@/components/home/TrustSection";
+import { platformStats } from "@/lib/mock-data";
+import { formatCompactCurrency, formatCompactNumber } from "@/lib/utils";
+import { WhyMaalGodaam } from "@/components/home/WhyMaalGodaam";
+import { SustainabilitySection } from "@/components/home/SustainabilitySection";
 import { Footer } from "@/components/layout/Footer";
 
-export const metadata: Metadata = { title: "About Lotwise" };
+export const metadata: Metadata = { title: "About MaalGodaam.com" };
 
 const stats = [
-  { label: "Inventory Value", value: formatCurrency(marketplaceStats.inventoryValue) },
-  { label: "Active Lots", value: `${formatCompactNumber(marketplaceStats.activeLots)}+` },
-  { label: "Verified Sellers", value: `${marketplaceStats.verifiedSellers}+` },
+  { label: "Inventory Value", value: formatCompactCurrency(platformStats.inventoryValue) },
+  { label: "Active Listings", value: `${formatCompactNumber(platformStats.activeListings)}+` },
+  { label: "Verified Suppliers", value: `${platformStats.verifiedSuppliers}+` },
 ];
 
 export default function AboutPage() {
@@ -20,16 +21,17 @@ export default function AboutPage() {
         <section className="container-page">
           <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
             <div>
-              <span className="text-xs font-semibold uppercase tracking-wide text-brand-600">
-                About Lotwise
+              <span className="text-xs font-semibold uppercase tracking-wide text-brand-700">
+                About MaalGodaam.com
               </span>
               <h1 className="mt-3 text-balance text-3xl font-extrabold leading-tight tracking-tight text-ink-900 sm:text-4xl">
-                Building the trusted marketplace for surplus inventory.
+                India&apos;s marketplace for quality surplus building materials.
               </h1>
               <p className="mt-4 text-lg text-ink-500">
-                Lotwise connects verified sellers of liquidation, overstock and
-                returned inventory with resellers and retailers ready to move
-                it back into the market — transparently and at scale.
+                MaalGodaam.com connects verified suppliers of surplus, excess
+                and discontinued building and interior materials with buyers
+                across India — transparently, and at exceptional value.
+                Build more for less.
               </p>
               <div className="mt-8 grid grid-cols-3 gap-6">
                 {stats.map((s) => (
@@ -42,8 +44,8 @@ export default function AboutPage() {
             </div>
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-4xl shadow-soft-xl">
               <Image
-                src="https://picsum.photos/seed/lw-about-warehouse/900/700"
-                alt="Lotwise fulfillment warehouse"
+                src="https://images.unsplash.com/photo-1684695749267-233af13276d0?w=900&h=700&fit=crop&auto=format&q=80"
+                alt="MaalGodaam materials warehouse"
                 fill
                 className="object-cover"
               />
@@ -51,7 +53,8 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <TrustSection />
+        <WhyMaalGodaam />
+        <SustainabilitySection />
       </main>
       <Footer />
     </>

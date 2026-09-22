@@ -2,14 +2,15 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import type { ComponentPropsWithoutRef } from "react";
 
-type Variant = "primary" | "secondary" | "outline" | "ghost" | "dark";
+type Variant = "primary" | "brand" | "outline" | "ghost" | "dark";
 type Size = "sm" | "md" | "lg";
 
+// Orange is the CTA color; green is reserved for brand/structural actions.
 const variantClasses: Record<Variant, string> = {
   primary:
-    "bg-brand-600 text-white hover:bg-brand-700 active:bg-brand-800 shadow-soft-sm",
-  secondary:
-    "bg-ink-900 text-white hover:bg-ink-800 active:bg-ink-950 shadow-soft-sm",
+    "bg-accent-500 text-white hover:bg-accent-600 active:bg-accent-700 shadow-soft-sm",
+  brand:
+    "bg-brand-700 text-white hover:bg-brand-800 active:bg-brand-900 shadow-soft-sm",
   outline:
     "bg-transparent text-ink-900 border border-ink-200 hover:border-ink-300 hover:bg-ink-50",
   ghost: "bg-transparent text-ink-700 hover:bg-ink-100",
@@ -40,7 +41,7 @@ export function Button(props: ButtonProps | LinkProps) {
 
   const classes = cn(
     "inline-flex items-center justify-center whitespace-nowrap font-semibold transition-all duration-200 ease-out",
-    "focus-visible:outline-2 focus-visible:outline-brand-500 focus-visible:outline-offset-2",
+    "focus-visible:outline-2 focus-visible:outline-accent-500 focus-visible:outline-offset-2",
     "disabled:opacity-50 disabled:pointer-events-none",
     "active:scale-[0.98]",
     variantClasses[variant],

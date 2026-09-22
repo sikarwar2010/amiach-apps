@@ -26,7 +26,7 @@ export function AccordionSection({
         <span className="flex items-center gap-2 text-sm font-bold text-ink-900">
           {title}
           {!!count && (
-            <span className="rounded-full bg-brand-50 px-1.5 py-0.5 text-[10px] font-semibold text-brand-700">
+            <span className="rounded-full bg-accent-50 px-1.5 py-0.5 text-[10px] font-semibold text-accent-700">
               {count}
             </span>
           )}
@@ -58,7 +58,7 @@ export function CheckboxRow({
         <span
           className={cn(
             "flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded-[6px] border transition-colors",
-            checked ? "border-brand-600 bg-brand-600" : "border-ink-300 bg-white"
+            checked ? "border-accent-500 bg-accent-500" : "border-ink-300 bg-white"
           )}
           style={{ height: "1.125rem", width: "1.125rem" }}
         >

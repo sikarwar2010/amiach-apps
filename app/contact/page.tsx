@@ -39,9 +39,9 @@ export default function ContactPage() {
 
             <div className="flex flex-col gap-4">
               {[
-                { icon: Mail, label: "Email", value: "partners@lotwise.com" },
-                { icon: Phone, label: "Phone", value: "+1 (800) 555-0142" },
-                { icon: MapPin, label: "Headquarters", value: "Dallas, TX" },
+                { icon: Mail, label: "Email", value: "partners@maalgodaam.com" },
+                { icon: Phone, label: "Phone", value: "+91 98765 43210" },
+                { icon: MapPin, label: "Headquarters", value: "Gurugram, Haryana" },
               ].map(({ icon: Icon, label, value }) => (
                 <div key={label} className="flex items-start gap-3 rounded-2xl border border-ink-100 bg-white p-4">
                   <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600">

@@ -11,20 +11,21 @@ import {
   X,
   ChevronDown,
   LayoutGrid,
-  Gavel,
-  Zap,
-  Star,
+  Tag,
+  Handshake,
+  FileText,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { categories } from "@/lib/mock-data";
 import { Button } from "@/components/ui/Button";
 import { SmartSearch } from "@/components/home/SmartSearch";
+import { WarehouseMark } from "@/components/brand/WarehouseMark";
 
 const navLinks = [
-  { label: "Browse Inventory", href: "/marketplace" },
-  { label: "How It Works", href: "/#how-it-works" },
-  { label: "For Buyers", href: "/marketplace" },
-  { label: "For Sellers", href: "/sell" },
+  { label: "Explore", href: "/materials" },
+  { label: "Deals", href: "/materials?featured=true" },
+  { label: "Sell Surplus", href: "/sell-surplus" },
+  { label: "How It Works", href: "/how-it-works" },
 ];
 
 export function FloatingNavbar() {
@@ -52,20 +53,18 @@ export function FloatingNavbar() {
       <header className="pointer-events-none fixed inset-x-0 top-0 z-[80] flex justify-center px-3 pt-3 sm:px-5 sm:pt-4">
         <div
           className={cn(
-            "pointer-events-auto flex w-full max-w-7xl items-center justify-between gap-2 rounded-[1.75rem] border border-white/60 bg-white/80 px-3 backdrop-blur-xl transition-all duration-300 ease-out sm:px-4",
+            "pointer-events-auto flex w-full max-w-7xl items-center justify-between gap-2 rounded-[1.75rem] border border-white/60 bg-white/85 px-3 backdrop-blur-xl transition-all duration-300 ease-out sm:px-4",
             scrolled ? "h-14 shadow-float" : "h-[4.5rem] shadow-soft"
           )}
         >
           <Link href="/" className="flex shrink-0 items-center gap-2 pl-1">
-            <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-ink-900 text-sm font-bold text-white">
-              L
-            </span>
+            <WarehouseMark size={34} className="shrink-0 text-brand-800" />
             <span className="text-lg font-extrabold tracking-tight text-ink-900">
-              Lotwise
+              MaalGodaam<span className="text-accent-600">.com</span>
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-1 lg:flex">
+          <nav className="hidden items-center gap-1 xl:flex">
             <div
               className="relative"
               onMouseEnter={() => setCategoriesOpen(true)}
@@ -81,7 +80,7 @@ export function FloatingNavbar() {
                     {categories.map((c) => (
                       <Link
                         key={c.id}
-                        href={`/marketplace?category=${c.slug}`}
+                        href={`/materials/${c.slug}`}
                         className="flex items-center justify-between rounded-xl px-3 py-2.5 text-sm text-ink-700 transition-colors hover:bg-brand-50 hover:text-brand-700"
                       >
                         <span className="flex items-center gap-2 font-medium">
@@ -136,22 +135,22 @@ export function FloatingNavbar() {
               className="relative hidden h-10 w-10 items-center justify-center rounded-full text-ink-600 transition-colors hover:bg-ink-100 sm:flex"
             >
               <ShoppingCart size={18} />
-              <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-brand-600" />
+              <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-accent-500" />
             </Link>
             <Link
               href="/login"
-              className="hidden rounded-full px-3.5 py-2 text-sm font-medium text-ink-700 transition-colors hover:bg-ink-100 lg:inline-flex"
+              className="hidden rounded-full px-3.5 py-2 text-sm font-medium text-ink-700 transition-colors hover:bg-ink-100 xl:inline-flex"
             >
               Sign In
             </Link>
-            <Button href="/sell" size="sm" className="hidden lg:inline-flex">
-              Get Started
+            <Button href="/post-requirement" size="sm" className="hidden xl:inline-flex">
+              Post Requirement
             </Button>
 
             <button
               onClick={() => setMobileOpen(true)}
               aria-label="Open menu"
-              className="ml-1 flex h-10 w-10 items-center justify-center rounded-full text-ink-700 hover:bg-ink-100 lg:hidden"
+              className="ml-1 flex h-10 w-10 items-center justify-center rounded-full text-ink-700 hover:bg-ink-100 xl:hidden"
             >
               <Menu size={20} />
             </button>
@@ -162,7 +161,7 @@ export function FloatingNavbar() {
       <SmartSearch open={searchOpen} onClose={() => setSearchOpen(false)} />
 
       {mobileOpen && (
-        <div className="fixed inset-0 z-[95] lg:hidden">
+        <div className="fixed inset-0 z-[95] xl:hidden">
           <button
             aria-label="Close menu"
             onClick={() => setMobileOpen(false)}
@@ -180,32 +179,39 @@ export function FloatingNavbar() {
             </div>
             <div className="flex flex-1 flex-col gap-1 overflow-y-auto">
               <Link
-                href="/marketplace"
+                href="/materials"
                 onClick={() => setMobileOpen(false)}
                 className="flex items-center gap-2 rounded-xl px-3 py-3 text-base font-semibold text-ink-900 hover:bg-ink-50"
               >
-                <LayoutGrid size={18} /> Browse Inventory
+                <LayoutGrid size={18} /> Explore Materials
               </Link>
               <Link
-                href="/marketplace?format=auction"
+                href="/materials?featured=true"
                 onClick={() => setMobileOpen(false)}
                 className="flex items-center gap-2 rounded-xl px-3 py-3 text-base font-semibold text-ink-900 hover:bg-ink-50"
               >
-                <Gavel size={18} /> Auctions
+                <Tag size={18} /> Deals
               </Link>
               <Link
-                href="/marketplace?format=buy-now"
+                href="/sell-surplus"
                 onClick={() => setMobileOpen(false)}
                 className="flex items-center gap-2 rounded-xl px-3 py-3 text-base font-semibold text-ink-900 hover:bg-ink-50"
               >
-                <Zap size={18} /> Buy Now Deals
+                <Handshake size={18} /> Sell Surplus
               </Link>
               <Link
-                href="/sellers"
+                href="/post-requirement"
                 onClick={() => setMobileOpen(false)}
                 className="flex items-center gap-2 rounded-xl px-3 py-3 text-base font-semibold text-ink-900 hover:bg-ink-50"
               >
-                <Star size={18} /> Trusted Sellers
+                <FileText size={18} /> Post Requirement
+              </Link>
+              <Link
+                href="/suppliers"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center gap-2 rounded-xl px-3 py-3 text-base font-semibold text-ink-900 hover:bg-ink-50"
+              >
+                <Handshake size={18} /> Trusted Suppliers
               </Link>
 
               <div className="my-3 h-px bg-ink-100" />
@@ -217,7 +223,7 @@ export function FloatingNavbar() {
                 {categories.slice(0, 8).map((c) => (
                   <Link
                     key={c.id}
-                    href={`/marketplace?category=${c.slug}`}
+                    href={`/materials/${c.slug}`}
                     onClick={() => setMobileOpen(false)}
                     className="rounded-xl px-3 py-2.5 text-sm font-medium text-ink-700 hover:bg-ink-50"
                   >
@@ -228,8 +234,8 @@ export function FloatingNavbar() {
             </div>
 
             <div className="mt-4 flex flex-col gap-2 border-t border-ink-100 pt-4">
-              <Button href="/sell" onClick={() => setMobileOpen(false)}>
-                Get Started
+              <Button href="/post-requirement" onClick={() => setMobileOpen(false)}>
+                Post Requirement
               </Button>
               <Button href="/login" variant="outline" onClick={() => setMobileOpen(false)}>
                 Sign In

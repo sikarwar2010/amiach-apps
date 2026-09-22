@@ -1,107 +1,130 @@
 "use client";
 
 import { useState } from "react";
-import { Gavel, MessageSquare, ShieldCheck, Zap } from "lucide-react";
-import type { InventoryLot } from "@/lib/types";
-import { formatCurrency, savingsPercent } from "@/lib/utils";
+import { Heart, MessageSquare, PackageSearch, ShieldCheck, Zap } from "lucide-react";
+import type { MaterialListing } from "@/lib/types";
+import { unitLabels } from "@/lib/labels";
+import { cn, formatCurrency, savingsPercent } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
-import { WishlistButton } from "@/components/ui/WishlistButton";
-import { CountdownTimer } from "@/components/ui/CountdownTimer";
+import { QuantitySelector } from "@/components/ui/QuantitySelector";
 
-export function PricingPanel({ listing }: { listing: InventoryLot }) {
-  const [bidAmount, setBidAmount] = useState(
-    listing.currentPrice + Math.max(50, Math.round(listing.currentPrice * 0.02))
-  );
+export function PricingPanel({ listing }: { listing: MaterialListing }) {
+  const [quantity, setQuantity] = useState(listing.minOrderQuantity);
   const [confirmation, setConfirmation] = useState<string | null>(null);
-  const savings = savingsPercent(listing.retailValue, listing.currentPrice);
+  const [saved, setSaved] = useState(false);
+  const savings = savingsPercent(listing.marketValue, listing.price);
+  const unit = unitLabels[listing.unit];
+  const unitPrice = listing.price / listing.quantity;
 
   return (
     <div className="rounded-3xl border border-ink-100 bg-white p-5 shadow-soft-sm sm:p-6">
       <div className="flex items-center justify-between">
         <div className="flex items-baseline gap-2">
           <span className="text-xs font-medium uppercase tracking-wide text-ink-500">
-            Retail Value
+            Market Value
           </span>
           <span className="text-sm text-ink-400 line-through">
-            {formatCurrency(listing.retailValue)}
+            {formatCurrency(listing.marketValue)}
           </span>
         </div>
-        {savings > 0 && <Badge tone="success">Save {savings}%</Badge>}
+        {savings > 0 && <Badge tone="accent">Save {savings}%</Badge>}
       </div>
 
       <div className="mt-2">
         <div className="text-xs font-medium uppercase tracking-wide text-ink-500">
-          {listing.saleFormat === "auction" ? "Current Bid" : listing.saleFormat === "quote" ? "Starting Price" : "Buy Now Price"}
+          MaalGodaam Price
         </div>
-        <div className="text-4xl font-extrabold text-ink-900">
-          {formatCurrency(listing.currentPrice)}
+        <div className="text-4xl font-extrabold text-brand-800">
+          {formatCurrency(listing.price)}
         </div>
-        {listing.saleFormat === "auction" && (
-          <div className="mt-1 text-sm text-ink-500">{listing.bidCount ?? 0} bids placed</div>
-        )}
+        <div className="mt-1 text-sm text-ink-500">
+          ≈ {formatCurrency(unitPrice)} per {unit.replace(/s$/, "")}
+        </div>
       </div>
 
-      {listing.saleFormat === "auction" && listing.auctionEndsAt && (
-        <div className="mt-5 rounded-2xl bg-ink-50 p-4">
-          <CountdownTimer endsAt={listing.auctionEndsAt} variant="full" />
+      {(listing.dealType === "buy-now" || listing.dealType === "request-quote") && (
+        <div className="mt-5">
+          <label className="text-xs font-medium text-ink-600">Quantity</label>
+          <div className="mt-1.5">
+            <QuantitySelector
+              value={quantity}
+              onChange={setQuantity}
+              min={listing.minOrderQuantity}
+              max={listing.quantity}
+              step={listing.unit === "sq-ft" || listing.unit === "running-ft" ? 10 : 1}
+              unitLabel={`${unit} · MOQ ${listing.minOrderQuantity}`}
+            />
+          </div>
         </div>
       )}
 
       <div className="mt-6 flex flex-col gap-3">
-        {listing.saleFormat === "auction" && (
-          <>
-            <div className="flex items-center gap-2 rounded-xl border border-ink-200 p-1.5">
-              <span className="pl-2.5 text-sm font-medium text-ink-500">$</span>
-              <input
-                type="number"
-                value={bidAmount}
-                onChange={(e) => setBidAmount(Number(e.target.value))}
-                className="w-full bg-transparent py-2 text-sm font-semibold text-ink-900 focus:outline-none"
-              />
-            </div>
-            <Button
-              size="lg"
-              onClick={() => setConfirmation(`Bid of ${formatCurrency(bidAmount)} placed.`)}
-            >
-              <Gavel size={18} /> Place Bid
-            </Button>
-            {listing.buyNowPrice && (
-              <Button
-                size="lg"
-                variant="outline"
-                onClick={() => setConfirmation(`Purchased at Buy Now price of ${formatCurrency(listing.buyNowPrice!)}.`)}
-              >
-                <Zap size={18} /> Buy Now for {formatCurrency(listing.buyNowPrice)}
-              </Button>
-            )}
-          </>
-        )}
-
-        {listing.saleFormat === "buy-now" && (
+        {listing.dealType === "buy-now" && (
           <Button
             size="lg"
-            onClick={() => setConfirmation(`Order placed for ${formatCurrency(listing.currentPrice)}.`)}
+            onClick={() =>
+              setConfirmation(
+                `Order placed for ${quantity} ${unit} — ${formatCurrency(unitPrice * quantity)}.`
+              )
+            }
           >
             <Zap size={18} /> Buy Now
           </Button>
         )}
 
-        {listing.saleFormat === "quote" && (
+        {listing.dealType === "request-quote" && (
           <Button
             size="lg"
-            onClick={() => setConfirmation("Quote request sent to the seller.")}
+            onClick={() =>
+              setConfirmation(`Quote requested for ${quantity} ${unit}. The supplier will respond shortly.`)
+            }
           >
             <MessageSquare size={18} /> Request Quote
           </Button>
         )}
 
-        <div className="flex items-center gap-2">
-          <Button size="md" variant="outline" className="flex-1">
-            <WishlistButton size="sm" className="static shadow-none ring-0" />
-            Add to Wishlist
+        {listing.dealType === "bulk-deal" && (
+          <Button
+            size="lg"
+            onClick={() => setConfirmation("Bulk deal enquiry sent to the supplier.")}
+          >
+            <PackageSearch size={18} /> Start Bulk Deal
           </Button>
-        </div>
+        )}
+
+        {listing.dealType !== "contact-supplier" && (
+          <Button
+            size="lg"
+            variant="outline"
+            onClick={() => setConfirmation("Your message has been sent to the supplier.")}
+          >
+            Contact Supplier
+          </Button>
+        )}
+
+        {listing.dealType === "contact-supplier" && (
+          <Button
+            size="lg"
+            onClick={() => setConfirmation("Your message has been sent to the supplier.")}
+          >
+            <MessageSquare size={18} /> Contact Supplier
+          </Button>
+        )}
+
+        <button
+          type="button"
+          onClick={() => setSaved((v) => !v)}
+          className={cn(
+            "inline-flex h-11 items-center justify-center gap-2 rounded-xl border text-sm font-semibold transition-colors",
+            saved
+              ? "border-danger-200 bg-danger-50 text-danger-600"
+              : "border-ink-200 text-ink-900 hover:border-ink-300 hover:bg-ink-50"
+          )}
+        >
+          <Heart size={16} className={saved ? "fill-danger-500 text-danger-500" : ""} />
+          {saved ? "Saved to Wishlist" : "Add to Wishlist"}
+        </button>
       </div>
 
       {confirmation && (
@@ -110,10 +133,10 @@ export function PricingPanel({ listing }: { listing: InventoryLot }) {
         </div>
       )}
 
-      <div className="mt-6 flex items-start gap-2 rounded-2xl bg-brand-50 p-3.5 text-xs text-brand-700">
+      <div className="mt-6 flex items-start gap-2 rounded-2xl bg-brand-50 p-3.5 text-xs text-brand-800">
         <ShieldCheck size={16} className="mt-0.5 shrink-0" />
-        Protected by Lotwise Buyer Support — manifests are verified against
-        seller listings.
+        Protected by MaalGodaam Buyer Support — listing details are verified
+        against the supplier&apos;s submission.
       </div>
     </div>
   );

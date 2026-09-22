@@ -1,12 +1,12 @@
 import { cn } from "@/lib/utils";
 
-type Tone = "neutral" | "brand" | "success" | "urgent" | "dark" | "outline";
+type Tone = "neutral" | "brand" | "accent" | "success" | "dark" | "outline";
 
 const toneClasses: Record<Tone, string> = {
   neutral: "bg-ink-100 text-ink-700",
   brand: "bg-brand-50 text-brand-700",
+  accent: "bg-accent-50 text-accent-700",
   success: "bg-success-50 text-success-700",
-  urgent: "bg-urgent-50 text-urgent-700",
   dark: "bg-ink-900 text-white",
   outline: "bg-white text-ink-700 ring-1 ring-inset ring-ink-200",
 };

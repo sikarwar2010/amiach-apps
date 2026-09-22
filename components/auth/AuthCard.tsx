@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { WarehouseMark } from "@/components/brand/WarehouseMark";
 
 export function AuthCard({
   title,
@@ -15,10 +16,10 @@ export function AuthCard({
     <main className="flex min-h-screen items-center justify-center px-4 pb-16 pt-28 sm:pt-32">
       <div className="w-full max-w-md rounded-4xl border border-ink-100 bg-white p-8 shadow-soft-sm sm:p-10">
         <Link href="/" className="flex items-center gap-2">
-          <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-ink-900 text-sm font-bold text-white">
-            L
+          <WarehouseMark size={34} className="shrink-0 text-brand-800" />
+          <span className="text-lg font-extrabold tracking-tight text-ink-900">
+            MaalGodaam<span className="text-accent-600">.com</span>
           </span>
-          <span className="text-lg font-extrabold tracking-tight text-ink-900">Lotwise</span>
         </Link>
 
         <h1 className="mt-6 text-2xl font-extrabold tracking-tight text-ink-900">{title}</h1>
@@ -28,7 +29,7 @@ export function AuthCard({
 
         <p className="mt-6 text-center text-sm text-ink-500">
           {footer.text}{" "}
-          <Link href={footer.href} className="font-semibold text-brand-600 hover:text-brand-700">
+          <Link href={footer.href} className="font-semibold text-brand-700 hover:text-brand-800">
             {footer.linkLabel}
           </Link>
         </p>
@@ -48,11 +49,11 @@ export function AuthField({
 }) {
   return (
     <div>
-      <label className="text-xs font-medium text-ink-600">{label}</label>
+      <label className="text-xs font-semibold text-ink-700">{label}</label>
       <input
         type={type}
         placeholder={placeholder}
-        className="mt-1.5 h-11 w-full rounded-xl border border-ink-200 px-3.5 text-sm text-ink-900 placeholder:text-ink-400 focus:border-brand-400 focus:outline-none"
+        className="mt-1.5 h-12 w-full rounded-2xl border border-ink-200 bg-ink-25 px-4 text-sm text-ink-900 transition-colors placeholder:text-ink-400 focus:border-brand-400 focus:bg-white focus:outline-none focus:ring-4 focus:ring-brand-50"
       />
     </div>
   );

@@ -1,12 +1,12 @@
 "use client";
 
 import { categories, locations } from "@/lib/mock-data";
-import { conditionLabels, lotSizeLabels, saleFormatLabels } from "@/lib/labels";
+import { conditionLabels, dealTypeLabels, unitLabels } from "@/lib/labels";
 import type { MarketplaceFilters } from "@/lib/filter-state";
 import { toggleValue } from "@/lib/filter-state";
 import { AccordionSection, CheckboxRow } from "@/components/ui/Accordion";
 import { formatCurrency } from "@/lib/utils";
-import type { ListingCondition, SaleFormat, InventoryLot } from "@/lib/types";
+import type { ConditionType, DealType, MaterialUnit } from "@/lib/types";
 
 export function FilterPanel({
   filters,
@@ -33,15 +33,15 @@ export function FilterPanel({
         </div>
       </AccordionSection>
 
-      <AccordionSection title="Sale Format" count={filters.saleFormats.length}>
+      <AccordionSection title="Deal Type" count={filters.dealTypes.length}>
         <div className="flex flex-col">
-          {(Object.keys(saleFormatLabels) as SaleFormat[]).map((f) => (
+          {(Object.keys(dealTypeLabels) as DealType[]).map((f) => (
             <CheckboxRow
               key={f}
-              label={saleFormatLabels[f]}
-              checked={filters.saleFormats.includes(f)}
+              label={dealTypeLabels[f]}
+              checked={filters.dealTypes.includes(f)}
               onChange={() =>
-                onChange({ ...filters, saleFormats: toggleValue(filters.saleFormats, f) })
+                onChange({ ...filters, dealTypes: toggleValue(filters.dealTypes, f) })
               }
             />
           ))}
@@ -50,7 +50,7 @@ export function FilterPanel({
 
       <AccordionSection title="Condition" count={filters.conditions.length}>
         <div className="flex flex-col">
-          {(Object.keys(conditionLabels) as ListingCondition[]).map((c) => (
+          {(Object.keys(conditionLabels) as ConditionType[]).map((c) => (
             <CheckboxRow
               key={c}
               label={conditionLabels[c]}
@@ -92,15 +92,15 @@ export function FilterPanel({
         </p>
       </AccordionSection>
 
-      <AccordionSection title="Lot Size" count={filters.lotSizes.length}>
+      <AccordionSection title="Unit" count={filters.units.length} defaultOpen={false}>
         <div className="flex flex-col">
-          {(Object.keys(lotSizeLabels) as InventoryLot["lotSize"][]).map((size) => (
+          {(Object.keys(unitLabels) as MaterialUnit[]).map((unit) => (
             <CheckboxRow
-              key={size}
-              label={lotSizeLabels[size]}
-              checked={filters.lotSizes.includes(size)}
+              key={unit}
+              label={unitLabels[unit]}
+              checked={filters.units.includes(unit)}
               onChange={() =>
-                onChange({ ...filters, lotSizes: toggleValue(filters.lotSizes, size) })
+                onChange({ ...filters, units: toggleValue(filters.units, unit) })
               }
             />
           ))}
@@ -112,7 +112,7 @@ export function FilterPanel({
           {locations.map((l) => (
             <CheckboxRow
               key={l.id}
-              label={`${l.city}, ${l.stateCode}`}
+              label={l.city}
               checked={filters.locations.includes(l.id)}
               onChange={() =>
                 onChange({ ...filters, locations: toggleValue(filters.locations, l.id) })
@@ -122,12 +122,10 @@ export function FilterPanel({
         </div>
       </AccordionSection>
 
-      <AccordionSection title="Shipping" defaultOpen={false}>
-        <div className="flex flex-col">
-          {["Freight", "LTL Freight", "Parcel", "Local Pickup"].map((s) => (
-            <CheckboxRow key={s} label={s} checked={false} onChange={() => {}} />
-          ))}
-        </div>
+      <AccordionSection title="Supplier" defaultOpen={false}>
+        <p className="text-xs text-ink-400">
+          Supplier filtering is available from each supplier&apos;s profile page.
+        </p>
       </AccordionSection>
 
       <AccordionSection title="Date Added" defaultOpen={false}>

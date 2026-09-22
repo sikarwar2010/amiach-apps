@@ -1,40 +1,42 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Manrope } from "next/font/google";
 import "./globals.css";
 import { FloatingNavbar } from "@/components/layout/FloatingNavbar";
 import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
 
-const jakarta = Plus_Jakarta_Sans({
+const manrope = Manrope({
   subsets: ["latin"],
-  variable: "--font-jakarta",
+  variable: "--font-manrope",
   display: "swap",
   weight: ["400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.lotwise.com"),
+  metadataBase: new URL("https://www.maalgodaam.com"),
   title: {
-    default: "Lotwise — Surplus & Liquidation Inventory Marketplace",
-    template: "%s | Lotwise",
+    default: "MaalGodaam.com — Quality Surplus Building & Interior Materials",
+    template: "%s | MaalGodaam.com",
   },
   description:
-    "Source liquidation, overstock, customer returns and wholesale inventory from verified sellers. Bid or buy bulk lots across 35+ categories on Lotwise, the B2B surplus marketplace.",
+    "MaalGodaam.com connects buyers with quality surplus, excess and overstock tiles, furniture, sanitaryware, plywood, flooring and interior materials from trusted suppliers across India. Build more for less.",
   keywords: [
-    "liquidation inventory",
-    "surplus stock",
-    "wholesale pallets",
-    "customer returns",
-    "overstock marketplace",
-    "bulk lots",
-    "B2B liquidation",
+    "surplus building materials",
+    "surplus tiles India",
+    "surplus plywood",
+    "sanitaryware surplus",
+    "overstock furniture",
+    "interior materials marketplace",
+    "excess inventory building materials",
+    "pan-India material sourcing",
   ],
   openGraph: {
-    title: "Lotwise — Surplus & Liquidation Inventory Marketplace",
+    title: "MaalGodaam.com — Quality Surplus. Greater Possibilities.",
     description:
-      "Discover quality surplus inventory at exceptional wholesale prices.",
-    url: "https://www.lotwise.com",
-    siteName: "Lotwise",
+      "Premium building & interior materials at exceptional value, sourced from trusted suppliers across India.",
+    url: "https://www.maalgodaam.com",
+    siteName: "MaalGodaam.com",
     type: "website",
+    locale: "en_IN",
   },
   robots: { index: true, follow: true },
 };
@@ -45,7 +47,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={jakarta.variable}>
+    <html lang="en" className={manrope.variable}>
       <body className="min-h-screen bg-ink-25 font-sans text-ink-900 antialiased">
         <FloatingNavbar />
         <div className="pb-24 lg:pb-0">{children}</div>

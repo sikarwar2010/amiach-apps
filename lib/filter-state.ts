@@ -1,11 +1,11 @@
-import type { InventoryLot, ListingCondition, SaleFormat } from "./types";
+import type { ConditionType, DealType, MaterialListing, MaterialUnit } from "./types";
 
 export interface MarketplaceFilters {
   categories: string[];
-  conditions: ListingCondition[];
-  saleFormats: SaleFormat[];
+  conditions: ConditionType[];
+  dealTypes: DealType[];
   locations: string[];
-  lotSizes: InventoryLot["lotSize"][];
+  units: MaterialUnit[];
   priceMin: number;
   priceMax: number;
 }
@@ -13,11 +13,11 @@ export interface MarketplaceFilters {
 export const defaultFilters: MarketplaceFilters = {
   categories: [],
   conditions: [],
-  saleFormats: [],
+  dealTypes: [],
   locations: [],
-  lotSizes: [],
+  units: [],
   priceMin: 0,
-  priceMax: 200000,
+  priceMax: 2500000,
 };
 
 export function toggleValue<T>(list: T[], value: T): T[] {
@@ -25,16 +25,16 @@ export function toggleValue<T>(list: T[], value: T): T[] {
 }
 
 export function applyFilters(
-  listings: InventoryLot[],
+  listings: MaterialListing[],
   filters: MarketplaceFilters
-): InventoryLot[] {
+): MaterialListing[] {
   return listings.filter((l) => {
     if (filters.categories.length && !filters.categories.includes(l.categoryId)) return false;
     if (filters.conditions.length && !filters.conditions.includes(l.condition)) return false;
-    if (filters.saleFormats.length && !filters.saleFormats.includes(l.saleFormat)) return false;
+    if (filters.dealTypes.length && !filters.dealTypes.includes(l.dealType)) return false;
     if (filters.locations.length && !filters.locations.includes(l.locationId)) return false;
-    if (filters.lotSizes.length && !filters.lotSizes.includes(l.lotSize)) return false;
-    if (l.currentPrice < filters.priceMin || l.currentPrice > filters.priceMax) return false;
+    if (filters.units.length && !filters.units.includes(l.unit)) return false;
+    if (l.price < filters.priceMin || l.price > filters.priceMax) return false;
     return true;
   });
 }
@@ -43,9 +43,9 @@ export function activeFilterCount(filters: MarketplaceFilters): number {
   return (
     filters.categories.length +
     filters.conditions.length +
-    filters.saleFormats.length +
+    filters.dealTypes.length +
     filters.locations.length +
-    filters.lotSizes.length +
+    filters.units.length +
     (filters.priceMin > defaultFilters.priceMin || filters.priceMax < defaultFilters.priceMax ? 1 : 0)
   );
 }

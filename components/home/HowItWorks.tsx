@@ -3,34 +3,32 @@
 import { useState } from "react";
 import {
   Boxes,
-  FileSearch,
-  Gavel,
-  ListChecks,
+  Handshake,
   PackageCheck,
-  Repeat,
   Rocket,
-  Tag,
+  Scale,
+  Search,
+  ShieldCheck,
+  ShoppingBag,
   Truck,
   Upload,
-  Users,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const buyerSteps = [
-  { icon: FileSearch, title: "Discover inventory", description: "Search and filter across thousands of active lots by category, location and condition." },
-  { icon: ListChecks, title: "Compare lots", description: "Evaluate retail value, savings and seller ratings side by side." },
-  { icon: PackageCheck, title: "Inspect manifests", description: "Review SKU-level manifests and condition grading before you commit." },
-  { icon: Gavel, title: "Bid or buy", description: "Place a competitive bid or purchase instantly at a fixed price." },
-  { icon: Truck, title: "Arrange shipping", description: "Coordinate freight, LTL or parcel delivery directly through the platform." },
-  { icon: Repeat, title: "Resell and scale", description: "Move inventory through your channels and reinvest in your next lot." },
+  { icon: Search, title: "Search", description: "Find materials by category, location, brand or application." },
+  { icon: Boxes, title: "Discover", description: "Browse surplus, overstock and clearance listings from verified suppliers." },
+  { icon: Scale, title: "Compare", description: "Evaluate market value, savings and supplier ratings side by side." },
+  { icon: ShoppingBag, title: "Request / Buy", description: "Buy now, request a quote, or start a bulk deal conversation." },
+  { icon: Truck, title: "Receive", description: "Coordinate transport and receive your materials on site." },
 ];
 
 const sellerSteps = [
-  { icon: Upload, title: "List inventory", description: "Create a listing in minutes with our guided lot builder." },
-  { icon: Boxes, title: "Upload manifests", description: "Add SKU-level detail and condition grading buyers trust." },
-  { icon: Tag, title: "Set pricing", description: "Choose auction, buy-now or request-quote pricing for each lot." },
-  { icon: Users, title: "Reach verified buyers", description: "Get discovered by an active network of resellers and retailers." },
-  { icon: Rocket, title: "Complete the sale", description: "Manage offers and close transactions with built-in support." },
+  { icon: Upload, title: "Submit Inventory", description: "Share details of your surplus, excess or discontinued stock." },
+  { icon: ShieldCheck, title: "Verify Details", description: "Our team reviews condition, quantity and pricing details." },
+  { icon: Rocket, title: "Publish", description: "Your listing goes live to a pan-India network of buyers." },
+  { icon: Handshake, title: "Connect With Buyers", description: "Respond to quote requests and bulk deal enquiries." },
+  { icon: PackageCheck, title: "Complete Sale", description: "Finalise terms and hand off with platform support." },
 ];
 
 export function HowItWorks() {
@@ -38,11 +36,11 @@ export function HowItWorks() {
   const steps = tab === "buyers" ? buyerSteps : sellerSteps;
 
   return (
-    <section id="how-it-works" className="scroll-mt-28 py-16 sm:py-20">
+    <section className="py-16 sm:py-20">
       <div className="container-page">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-2xl font-extrabold tracking-tight text-ink-900 sm:text-3xl">
-            How Lotwise Works
+            How MaalGodaam Works
           </h2>
           <p className="mt-3 text-ink-500">
             A streamlined path for both sides of the marketplace.
@@ -69,18 +67,13 @@ export function HowItWorks() {
             aria-hidden
             className="absolute left-0 right-0 top-6 hidden h-px bg-ink-200 lg:block"
           />
-          <div
-            className={cn(
-              "grid grid-cols-1 gap-6 sm:grid-cols-2",
-              tab === "buyers" ? "lg:grid-cols-6" : "lg:grid-cols-5"
-            )}
-          >
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
             {steps.map((step, i) => (
               <div key={step.title} className="relative flex flex-col items-start">
-                <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-2xl bg-ink-900 text-white shadow-soft-sm">
+                <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-800 text-white shadow-soft-sm">
                   <step.icon size={20} />
                 </div>
-                <span className="mt-3 text-xs font-semibold text-brand-600">
+                <span className="mt-3 text-xs font-semibold text-accent-600">
                   Step {i + 1}
                 </span>
                 <h3 className="mt-1 text-sm font-bold text-ink-900">{step.title}</h3>

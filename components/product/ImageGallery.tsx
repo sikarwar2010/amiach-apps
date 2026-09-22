@@ -30,6 +30,9 @@ export function ImageGallery({ images, title }: { images: string[]; title: strin
         <span className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-ink-600 shadow-soft-sm">
           <ZoomIn size={16} />
         </span>
+        <span className="absolute bottom-3 right-3 rounded-full bg-ink-950/70 px-2.5 py-1 text-xs font-medium text-white">
+          {active + 1} / {images.length}
+        </span>
       </div>
 
       <div className="flex gap-3 overflow-x-auto no-scrollbar">

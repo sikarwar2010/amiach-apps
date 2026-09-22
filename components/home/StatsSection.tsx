@@ -1,12 +1,12 @@
-import { marketplaceStats } from "@/lib/mock-data";
-import { formatCompactNumber, formatCurrency } from "@/lib/utils";
+import { platformStats } from "@/lib/mock-data";
+import { formatCompactCurrency, formatCompactNumber } from "@/lib/utils";
 
 const stats = [
-  { label: "Inventory Value", value: formatCurrency(marketplaceStats.inventoryValue) },
-  { label: "Active Lots", value: `${formatCompactNumber(marketplaceStats.activeLots)}+` },
-  { label: "Verified Sellers", value: `${marketplaceStats.verifiedSellers}+` },
-  { label: "Categories", value: `${marketplaceStats.categories}+` },
-  { label: "Cities", value: `${marketplaceStats.cities}+` },
+  { label: "Inventory Value", value: formatCompactCurrency(platformStats.inventoryValue) },
+  { label: "Active Listings", value: `${formatCompactNumber(platformStats.activeListings)}+` },
+  { label: "Verified Suppliers", value: `${platformStats.verifiedSuppliers}+` },
+  { label: "Categories", value: `${platformStats.categories}+` },
+  { label: "Cities", value: `${platformStats.cities}+` },
 ];
 
 export function StatsSection() {

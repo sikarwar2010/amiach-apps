@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Heart } from "lucide-react";
 import { listings } from "@/lib/mock-data";
-import { InventoryCard } from "@/components/cards/InventoryCard";
+import { MaterialCard } from "@/components/cards/MaterialCard";
 import { Button } from "@/components/ui/Button";
 import { Footer } from "@/components/layout/Footer";
 
@@ -14,20 +14,20 @@ export default function WishlistPage() {
     <>
       <main className="pt-28 sm:pt-32">
         <div className="container-page pb-24">
-          <span className="text-xs font-semibold uppercase tracking-wide text-brand-600">
+          <span className="text-xs font-semibold uppercase tracking-wide text-brand-700">
             Your Account
           </span>
           <h1 className="text-2xl font-extrabold tracking-tight text-ink-900 sm:text-3xl">
             Wishlist
           </h1>
           <p className="mt-2 text-ink-500">
-            {saved.length} saved {saved.length === 1 ? "lot" : "lots"}
+            {saved.length} saved {saved.length === 1 ? "material" : "materials"}
           </p>
 
           {saved.length > 0 ? (
             <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {saved.map((listing) => (
-                <InventoryCard key={listing.id} listing={listing} />
+                <MaterialCard key={listing.id} listing={listing} />
               ))}
             </div>
           ) : (
@@ -35,11 +35,11 @@ export default function WishlistPage() {
               <Heart size={32} className="text-ink-300" />
               <h3 className="mt-4 text-lg font-bold text-ink-900">Your wishlist is empty</h3>
               <p className="mt-1 max-w-sm text-sm text-ink-500">
-                Save lots you're interested in to compare and track pricing
-                over time.
+                Save materials you&apos;re interested in to compare and track
+                pricing over time.
               </p>
-              <Button href="/marketplace" className="mt-5">
-                Browse Inventory
+              <Button href="/materials" className="mt-5">
+                Explore Materials
               </Button>
             </div>
           )}

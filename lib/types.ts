@@ -1,29 +1,39 @@
-// Core data architecture for the Lotwise marketplace.
-// These types mirror what would come back from the API; mock-data.ts
+// Core data architecture for the MaalGodaam.com marketplace.
+// These types mirror what would come back from the API; data.ts
 // populates them for now so every UI is already shaped for real data.
 
-export type ListingCondition =
-  | "new"
-  | "open-box"
-  | "refurbished"
-  | "grade-a"
-  | "grade-b"
-  | "grade-c"
-  | "customer-returns"
-  | "mixed";
+export type ConditionType =
+  | "surplus"
+  | "overstock"
+  | "excess"
+  | "discontinued"
+  | "clearance"
+  | "customer-return"
+  | "display-stock"
+  | "factory-stock";
 
-export type SaleFormat = "auction" | "buy-now" | "quote";
+export type DealType = "buy-now" | "request-quote" | "bulk-deal" | "contact-supplier";
 
-export type ShippingMethod = "freight" | "ltl" | "parcel" | "local-pickup";
+export type MaterialUnit =
+  | "sq-ft"
+  | "piece"
+  | "box"
+  | "set"
+  | "running-ft"
+  | "sheet"
+  | "roll"
+  | "unit";
+
+export type LogisticsMethod = "transport-arranged" | "self-pickup" | "freight" | "local-delivery";
 
 export interface Location {
   id: string;
   city: string;
   state: string;
-  stateCode: string;
-  country: string;
   region: string;
-  dealCount: number;
+  pincode?: string;
+  country: string;
+  listingCount: number;
   lat?: number;
   lng?: number;
 }
@@ -32,13 +42,13 @@ export interface Category {
   id: string;
   slug: string;
   name: string;
+  descriptor: string;
   listingCount: number;
   imageUrl: string;
-  description?: string;
   parentId?: string | null;
 }
 
-export interface Seller {
+export interface Supplier {
   id: string;
   slug: string;
   name: string;
@@ -47,7 +57,8 @@ export interface Seller {
   location: string;
   categories: string[];
   activeListings: number;
-  activeUnits: number;
+  availableInventoryUnits: number;
+  yearsActive?: number;
   responseRate: number; // 0-100
   rating: number; // 0-5
   reviewCount: number;
@@ -55,65 +66,71 @@ export interface Seller {
   description?: string;
 }
 
-export interface Bid {
-  id: string;
-  listingId: string;
-  amount: number;
-  bidderInitials: string;
-  placedAt: string; // ISO datetime
+export interface SpecificationEntry {
+  label: string;
+  value: string;
 }
 
-export interface ManifestLine {
-  sku: string;
-  description: string;
-  quantity: number;
-  unitRetail: number;
-  category: string;
-}
-
-export interface InventoryLot {
+export interface MaterialListing {
   id: string;
   slug: string;
   title: string;
   brand: string;
   categoryId: string;
   subcategory?: string;
-  condition: ListingCondition;
+  condition: ConditionType;
   images: string[];
   quantity: number;
-  lotSize: "single-pallet" | "multi-pallet" | "truckload" | "case-pack" | "unit";
+  unit: MaterialUnit;
+  minOrderQuantity: number;
   locationId: string;
-  sellerId: string;
-  saleFormat: SaleFormat;
-  retailValue: number;
-  currentPrice: number; // current bid, or buy-now price, or starting quote price
-  buyNowPrice?: number; // present when a buy-now option exists alongside auction
-  bidCount?: number;
-  bids?: Bid[];
-  auctionEndsAt?: string; // ISO datetime, only for auctions
-  shippingMethods: ShippingMethod[];
+  supplierId: string;
+  dealType: DealType;
+  marketValue: number;
+  price: number;
+  logisticsMethods: LogisticsMethod[];
   description: string;
   conditionNotes?: string;
-  manifest?: ManifestLine[];
+  specifications: SpecificationEntry[];
+  dimensions?: string;
+  material?: string;
+  finish?: string;
+  color?: string;
+  packaging?: string;
   dateAdded: string; // ISO date
   featured?: boolean;
   wishlistCount?: number;
 }
 
-export interface Order {
+export interface Requirement {
   id: string;
-  listingId: string;
-  buyerId: string;
-  sellerId: string;
-  amount: number;
-  status: "pending" | "confirmed" | "shipped" | "delivered" | "cancelled";
+  material: string;
+  categoryId: string;
+  quantity: number;
+  unit: MaterialUnit;
+  preferredLocation: string;
+  budget?: string;
+  requiredBy?: string;
+  additionalRequirements?: string;
+  status: "open" | "matching" | "fulfilled" | "closed";
   createdAt: string;
 }
 
-export interface MarketplaceStats {
+export interface Enquiry {
+  id: string;
+  listingId: string;
+  supplierId: string;
+  type: "quote" | "contact" | "bulk";
+  buyerName: string;
+  message?: string;
+  status: "pending" | "responded" | "closed";
+  createdAt: string;
+}
+
+export interface PlatformStats {
   inventoryValue: number;
-  activeLots: number;
-  verifiedSellers: number;
+  activeListings: number;
+  verifiedSuppliers: number;
   categories: number;
   cities: number;
 }
