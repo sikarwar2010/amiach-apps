@@ -45,7 +45,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
           <nav className="mb-5 flex items-center gap-1.5 text-xs text-ink-400">
             <Link href="/" className="hover:text-ink-700">Home</Link>
             <ChevronRight size={12} />
-            <Link href="/materials" className="hover:text-ink-700">Materials</Link>
+            <Link href="/catalogue" className="hover:text-ink-700">Catalogue</Link>
             <ChevronRight size={12} />
             <span className="text-ink-600">{conditionLabels[listing.condition]}</span>
           </nav>

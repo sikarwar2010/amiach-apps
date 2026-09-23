@@ -68,7 +68,7 @@ export default function MyEnquiriesPage() {
                 Request a quote or contact a supplier from any listing to
                 start a conversation.
               </p>
-              <Button href="/materials" className="mt-5">
+              <Button href="/catalogue" className="mt-5">
                 Explore Materials
               </Button>
             </div>

@@ -30,7 +30,7 @@ export function HeroSection() {
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <Button href="/materials" size="lg">
+            <Button href="/catalogue" size="lg">
               Explore Materials
               <ArrowRight size={18} />
             </Button>

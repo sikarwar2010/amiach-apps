@@ -20,18 +20,25 @@ export function PromoBanner() {
           <div className="absolute inset-0 flex items-center">
             <div className="max-w-lg px-6 sm:px-12">
               <h2 className="text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl">
-                More Value.
+                Build Smart.
                 <br />
-                A Better Tomorrow.
+                Save More.
+                <br />
+                Waste Less.
               </h2>
               <p className="mt-4 max-w-sm text-white/70">
                 Build with quality surplus materials that are better for your
                 budget and better for the planet.
               </p>
-              <Button href="/materials" size="lg" className="mt-6">
-                Explore Now
-                <ArrowRight size={18} />
-              </Button>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Button href="/catalogue" size="lg">
+                  Explore Materials
+                  <ArrowRight size={18} />
+                </Button>
+                <Button href="/sell-surplus" size="lg" variant="dark">
+                  Sell Surplus
+                </Button>
+              </div>
             </div>
           </div>
         </div>

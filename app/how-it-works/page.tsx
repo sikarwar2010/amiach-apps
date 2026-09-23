@@ -22,7 +22,7 @@ export default function HowItWorksPage() {
             A simple path to sourcing or selling surplus material.
           </h1>
           <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Button href="/materials">Explore Materials</Button>
+            <Button href="/catalogue">Explore Materials</Button>
             <Button href="/sell-surplus" variant="outline">Sell Your Surplus</Button>
           </div>
         </div>

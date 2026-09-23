@@ -38,7 +38,7 @@ export default function WishlistPage() {
                 Save materials you&apos;re interested in to compare and track
                 pricing over time.
               </p>
-              <Button href="/materials" className="mt-5">
+              <Button href="/catalogue" className="mt-5">
                 Explore Materials
               </Button>
             </div>

@@ -1,10 +1,24 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { MapPin, Navigation, Search } from "lucide-react";
 import { locations } from "@/lib/mock-data";
 import { formatNumber } from "@/lib/utils";
 
 export function LocationDiscovery() {
   const sorted = [...locations].sort((a, b) => b.listingCount - a.listingCount);
+  const [query, setQuery] = useState("");
+  const router = useRouter();
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    const match = locations.find((l) =>
+      l.city.toLowerCase().includes(query.trim().toLowerCase())
+    );
+    router.push(match ? `/deals/${match.id}` : "/deals");
+  };
 
   return (
     <section className="py-16 sm:py-20">
@@ -25,20 +39,28 @@ export function LocationDiscovery() {
                 pincode or radius.
               </p>
 
-              <div className="mt-6 flex items-center gap-2 rounded-2xl bg-white/10 p-1.5 ring-1 ring-inset ring-white/10">
+              <form
+                onSubmit={handleSearch}
+                className="mt-6 flex items-center gap-2 rounded-2xl bg-white/10 p-1.5 ring-1 ring-inset ring-white/10"
+              >
                 <Search size={17} className="ml-2 shrink-0 text-white/50" />
                 <input
                   type="text"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
                   placeholder="Enter city, state or pincode..."
                   className="w-full bg-transparent py-2 text-sm text-white placeholder:text-white/40 focus:outline-none"
                 />
-                <button className="shrink-0 rounded-xl bg-accent-500 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-accent-600">
+                <button
+                  type="submit"
+                  className="shrink-0 rounded-xl bg-accent-500 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-accent-600"
+                >
                   Search
                 </button>
-              </div>
+              </form>
 
               <Link
-                href="/materials"
+                href="/deals"
                 className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-white/70 hover:text-white"
               >
                 <MapPin size={14} /> Or browse all 42+ cities
@@ -49,7 +71,7 @@ export function LocationDiscovery() {
               {sorted.map((loc) => (
                 <Link
                   key={loc.id}
-                  href={`/materials?location=${loc.id}`}
+                  href={`/deals/${loc.id}`}
                   className="group flex flex-col justify-between rounded-2xl bg-white/[0.06] p-4 ring-1 ring-inset ring-white/10 transition-all duration-200 hover:bg-white/[0.12]"
                 >
                   <MapPin size={16} className="text-accent-400" />

@@ -63,7 +63,7 @@ export default function CartPage() {
             <div className="mt-8 flex flex-col items-center justify-center rounded-3xl border border-dashed border-ink-200 py-24 text-center">
               <ShoppingCart size={32} className="text-ink-300" />
               <h3 className="mt-4 text-lg font-bold text-ink-900">Your cart is empty</h3>
-              <Button href="/materials" className="mt-5">
+              <Button href="/catalogue" className="mt-5">
                 Explore Materials
               </Button>
             </div>

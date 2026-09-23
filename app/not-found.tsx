@@ -14,7 +14,7 @@ export default function NotFound() {
         This listing may have sold out or been removed. Explore the rest of
         the marketplace instead.
       </p>
-      <Button href="/materials" size="lg" className="mt-6">
+      <Button href="/catalogue" size="lg" className="mt-6">
         Explore Materials
       </Button>
     </main>

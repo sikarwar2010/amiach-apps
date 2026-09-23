@@ -1,8 +1,10 @@
 {
-  "/materials/page": "app/materials/page.js",
-  "/product/[slug]/page": "app/product/[slug]/page.js",
-  "/materials/[category]/page": "app/materials/[category]/page.js",
+  "/page": "app/page.js",
+  "/catalogue/[category]/page": "app/catalogue/[category]/page.js",
+  "/deals/page": "app/deals/page.js",
+  "/catalogue/page": "app/catalogue/page.js",
   "/how-it-works/page": "app/how-it-works/page.js",
-  "/cart/page": "app/cart/page.js",
-  "/sell-surplus/page": "app/sell-surplus/page.js"
+  "/sell-surplus/page": "app/sell-surplus/page.js",
+  "/deals/[location]/page": "app/deals/[location]/page.js",
+  "/post-requirement/page": "app/post-requirement/page.js"
 }

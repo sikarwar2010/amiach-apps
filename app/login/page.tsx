@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { LogIn } from "lucide-react";
 import { AuthCard, AuthField } from "@/components/auth/AuthCard";
 import { Button } from "@/components/ui/Button";
@@ -16,9 +17,9 @@ export default function LoginPage() {
         <AuthField label="Business Email" type="email" placeholder="you@company.com" />
         <AuthField label="Password" type="password" placeholder="••••••••" />
         <div className="flex items-center justify-end">
-          <a href="#" className="text-xs font-semibold text-brand-600 hover:text-brand-700">
+          <Link href="/forgot-password" className="text-xs font-semibold text-brand-600 hover:text-brand-700">
             Forgot password?
-          </a>
+          </Link>
         </div>
         <Button type="submit" size="lg" className="mt-1">
           <LogIn size={17} /> Sign In

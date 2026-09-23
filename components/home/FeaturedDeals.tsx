@@ -35,7 +35,7 @@ export function FeaturedDeals() {
             </p>
           </div>
           <Link
-            href="/materials"
+            href="/deals"
             className="hidden shrink-0 items-center gap-1 text-sm font-semibold text-brand-700 hover:text-brand-800 sm:inline-flex"
           >
             View full marketplace <ArrowUpRight size={15} />
@@ -66,7 +66,7 @@ export function FeaturedDeals() {
         </div>
 
         <Link
-          href="/materials"
+          href="/deals"
           className="mt-8 flex items-center justify-center gap-1 text-sm font-semibold text-brand-700 sm:hidden"
         >
           View full marketplace <ArrowUpRight size={15} />

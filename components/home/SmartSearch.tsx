@@ -48,7 +48,7 @@ export function SmartSearch({
   if (!open) return null;
 
   const runSearch = (term: string) => {
-    router.push(`/materials?q=${encodeURIComponent(term)}`);
+    router.push(`/search?q=${encodeURIComponent(term)}`);
     onClose();
   };
 
@@ -130,7 +130,7 @@ export function SmartSearch({
                 <button
                   key={c.id}
                   onClick={() => {
-                    router.push(`/materials/${c.slug}`);
+                    router.push(`/catalogue/${c.slug}`);
                     onClose();
                   }}
                   className="flex items-center justify-between rounded-xl border border-ink-100 px-3 py-2.5 text-left text-sm font-medium text-ink-700 transition-colors hover:border-brand-300 hover:bg-brand-50"
@@ -169,7 +169,7 @@ export function SmartSearch({
                 <button
                   key={l.id}
                   onClick={() => {
-                    router.push(`/materials?location=${l.id}`);
+                    router.push(`/deals/${l.id}`);
                     onClose();
                   }}
                   className="rounded-full border border-ink-100 px-3 py-1.5 text-xs font-medium text-ink-600 hover:border-brand-300 hover:bg-brand-50 hover:text-brand-700"

@@ -27,7 +27,7 @@ export default function CheckoutPage() {
               A confirmation has been sent to your business email. Your
               supplier will coordinate transport details shortly.
             </p>
-            <Button href="/materials" className="mt-6">
+            <Button href="/catalogue" className="mt-6">
               Continue Browsing
             </Button>
           </div>

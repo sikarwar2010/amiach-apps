@@ -9,6 +9,7 @@ import { MaterialCard } from "@/components/cards/MaterialCard";
 import { MaterialCardSkeleton } from "@/components/ui/Skeleton";
 import { FilterSidebar } from "./FilterSidebar";
 import { MobileFilterSheet } from "./MobileFilterSheet";
+import { LocationChipRow } from "./LocationChipRow";
 import { cn } from "@/lib/utils";
 
 const sortOptions = [
@@ -21,16 +22,20 @@ const sortOptions = [
 
 export function CatalogueContent({
   presetCategory,
+  presetLocation,
   title = "Browse Materials",
   eyebrow = "Explore Materials",
+  showLocationChips = false,
 }: {
   presetCategory?: string;
+  presetLocation?: string;
   title?: string;
   eyebrow?: string;
+  showLocationChips?: boolean;
 }) {
   const searchParams = useSearchParams();
   const initialCategory = presetCategory ?? searchParams.get("category");
-  const initialLocation = searchParams.get("location");
+  const initialLocation = presetLocation ?? searchParams.get("location");
   const initialFeatured = searchParams.get("featured") === "true";
   const initialQuery = searchParams.get("q") ?? "";
 
@@ -85,6 +90,12 @@ export function CatalogueContent({
             {filtered.length} active listings matching your criteria
           </p>
         </div>
+
+        {showLocationChips && (
+          <div className="mt-5">
+            <LocationChipRow activeLocationId={presetLocation} />
+          </div>
+        )}
 
         <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
           <div className="flex flex-1 items-center gap-2 rounded-2xl border border-ink-200 bg-white px-4 py-3">

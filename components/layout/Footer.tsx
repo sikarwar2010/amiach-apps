@@ -1,15 +1,15 @@
 import Link from "next/link";
-import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { WarehouseMark } from "@/components/brand/WarehouseMark";
 
 const columns = [
   {
     title: "Marketplace",
     links: [
-      { label: "Explore Materials", href: "/materials" },
-      { label: "Categories", href: "/materials" },
-      { label: "Featured Deals", href: "/materials?featured=true" },
-      { label: "Supplier Directory", href: "/suppliers" },
+      { label: "Catalogue", href: "/catalogue" },
+      { label: "Deals Around You", href: "/deals" },
+      { label: "Categories", href: "/catalogue" },
+      { label: "Suppliers", href: "/suppliers" },
     ],
   },
   {
@@ -17,26 +17,34 @@ const columns = [
     links: [
       { label: "How It Works", href: "/how-it-works" },
       { label: "Post Requirement", href: "/post-requirement" },
-      { label: "Buyer FAQ", href: "/faq" },
-      { label: "Support", href: "/contact" },
+      { label: "Buyer Support", href: "/contact" },
+      { label: "FAQ", href: "/faq" },
     ],
   },
   {
     title: "For Sellers",
     links: [
-      { label: "Sell Your Surplus", href: "/sell-surplus" },
-      { label: "How Selling Works", href: "/how-it-works" },
-      { label: "Seller FAQ", href: "/faq" },
-      { label: "Seller Dashboard", href: "/dashboard/seller" },
+      { label: "Sell Surplus", href: "/sell-surplus" },
+      { label: "Seller Guide", href: "/how-it-works" },
+      { label: "Seller Support", href: "/contact" },
     ],
   },
   {
     title: "Company",
     links: [
-      { label: "About MaalGodaam", href: "/about" },
+      { label: "About", href: "/about" },
       { label: "Contact", href: "/contact" },
-      { label: "Terms & Conditions", href: "/terms" },
-      { label: "Privacy Policy", href: "/privacy" },
+      { label: "Careers", href: "/careers" },
+    ],
+  },
+  {
+    title: "Legal",
+    links: [
+      { label: "Privacy", href: "/privacy" },
+      { label: "Terms", href: "/terms" },
+      { label: "Shipping", href: "/shipping" },
+      { label: "Refund", href: "/refund" },
+      { label: "FAQ", href: "/faq" },
     ],
   },
 ];
@@ -45,8 +53,8 @@ export function Footer() {
   return (
     <footer className="mt-16 border-t border-ink-100 bg-white pb-28 pt-16 lg:pb-16">
       <div className="container-page">
-        <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:grid-cols-6">
-          <div className="col-span-2 lg:col-span-2">
+        <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:grid-cols-7">
+          <div className="col-span-2">
             <Link href="/" className="flex items-center gap-2">
               <WarehouseMark size={34} className="shrink-0 text-brand-800" />
               <span className="text-lg font-extrabold tracking-tight text-ink-900">
@@ -59,27 +67,15 @@ export function Footer() {
               for less.
             </p>
             <div className="mt-5 flex flex-col gap-2 text-sm text-ink-600">
-              <span className="inline-flex items-center gap-2">
+              <a href="mailto:partners@maalgodaam.com" className="inline-flex items-center gap-2 hover:text-brand-700">
                 <Mail size={15} className="text-ink-400" /> partners@maalgodaam.com
-              </span>
-              <span className="inline-flex items-center gap-2">
+              </a>
+              <a href="tel:+919876543210" className="inline-flex items-center gap-2 hover:text-brand-700">
                 <Phone size={15} className="text-ink-400" /> +91 98765 43210
-              </span>
+              </a>
               <span className="inline-flex items-center gap-2">
                 <MapPin size={15} className="text-ink-400" /> Gurugram, Haryana — HQ
               </span>
-            </div>
-            <div className="mt-5 flex gap-2">
-              {[Instagram, Linkedin, Facebook].map((Icon, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  aria-label="Social link"
-                  className="flex h-9 w-9 items-center justify-center rounded-full bg-ink-100 text-ink-600 transition-colors hover:bg-brand-800 hover:text-white"
-                >
-                  <Icon size={16} />
-                </a>
-              ))}
             </div>
           </div>
 

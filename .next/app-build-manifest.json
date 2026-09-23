@@ -16,35 +16,40 @@
       "static/chunks/main-app.js",
       "static/chunks/app/not-found.js"
     ],
-    "/materials/[category]/page": [
+    "/catalogue/[category]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/materials/[category]/page.js"
+      "static/chunks/app/catalogue/[category]/page.js"
     ],
-    "/materials/page": [
+    "/deals/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/materials/page.js"
+      "static/chunks/app/deals/page.js"
     ],
-    "/product/[slug]/page": [
+    "/catalogue/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/product/[slug]/page.js"
+      "static/chunks/app/catalogue/page.js"
     ],
     "/sell-surplus/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/sell-surplus/page.js"
     ],
-    "/cart/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/cart/page.js"
-    ],
     "/how-it-works/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/how-it-works/page.js"
+    ],
+    "/deals/[location]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/deals/[location]/page.js"
+    ],
+    "/post-requirement/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/post-requirement/page.js"
     ]
   }
 }

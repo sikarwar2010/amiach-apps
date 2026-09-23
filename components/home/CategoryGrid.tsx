@@ -43,7 +43,7 @@ export function CategoryGrid() {
             </p>
           </div>
           <Link
-            href="/materials"
+            href="/catalogue"
             className="hidden shrink-0 items-center gap-1 text-sm font-semibold text-brand-700 hover:text-brand-800 sm:inline-flex"
           >
             View all categories <ArrowUpRight size={15} />
@@ -59,7 +59,7 @@ export function CategoryGrid() {
             return (
               <Link
                 key={category.id}
-                href={`/materials/${category.slug}`}
+                href={`/catalogue/${category.slug}`}
                 style={{
                   clipPath: isFirst
                     ? "polygon(0 0, 100% 0, 92% 100%, 0 100%)"
@@ -99,7 +99,7 @@ export function CategoryGrid() {
             return (
               <Link
                 key={category.id}
-                href={`/materials/${category.slug}`}
+                href={`/catalogue/${category.slug}`}
                 className="group relative flex h-56 w-[72%] shrink-0 overflow-hidden rounded-3xl shadow-soft-sm ring-1 ring-inset ring-ink-100 sm:w-[42%]"
               >
                 <Image
@@ -128,7 +128,7 @@ export function CategoryGrid() {
         </div>
 
         <Link
-          href="/materials"
+          href="/catalogue"
           className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-brand-700 lg:hidden"
         >
           View all categories <ArrowUpRight size={15} />

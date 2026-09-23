@@ -14,6 +14,7 @@ import {
   Tag,
   Handshake,
   FileText,
+  UserRound,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { categories } from "@/lib/mock-data";
@@ -22,8 +23,8 @@ import { SmartSearch } from "@/components/home/SmartSearch";
 import { WarehouseMark } from "@/components/brand/WarehouseMark";
 
 const navLinks = [
-  { label: "Explore", href: "/materials" },
-  { label: "Deals", href: "/materials?featured=true" },
+  { label: "Explore", href: "/catalogue" },
+  { label: "Deals", href: "/deals" },
   { label: "Sell Surplus", href: "/sell-surplus" },
   { label: "How It Works", href: "/how-it-works" },
 ];
@@ -80,7 +81,7 @@ export function FloatingNavbar() {
                     {categories.map((c) => (
                       <Link
                         key={c.id}
-                        href={`/materials/${c.slug}`}
+                        href={`/catalogue/${c.slug}`}
                         className="flex items-center justify-between rounded-xl px-3 py-2.5 text-sm text-ink-700 transition-colors hover:bg-brand-50 hover:text-brand-700"
                       >
                         <span className="flex items-center gap-2 font-medium">
@@ -115,13 +116,14 @@ export function FloatingNavbar() {
             >
               <Search size={18} />
             </button>
-            <button
-              aria-label="Choose location"
+            <Link
+              href="/deals"
+              aria-label="Browse deals by location"
               className="hidden h-10 items-center gap-1.5 rounded-full px-3 text-sm font-medium text-ink-600 transition-colors hover:bg-ink-100 md:flex"
             >
               <MapPin size={16} />
               All Locations
-            </button>
+            </Link>
             <Link
               href="/wishlist"
               aria-label="Wishlist"
@@ -136,6 +138,13 @@ export function FloatingNavbar() {
             >
               <ShoppingCart size={18} />
               <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-accent-500" />
+            </Link>
+            <Link
+              href="/account"
+              aria-label="Account"
+              className="hidden h-10 w-10 items-center justify-center rounded-full text-ink-600 transition-colors hover:bg-ink-100 sm:flex"
+            >
+              <UserRound size={18} />
             </Link>
             <Link
               href="/login"
@@ -179,18 +188,18 @@ export function FloatingNavbar() {
             </div>
             <div className="flex flex-1 flex-col gap-1 overflow-y-auto">
               <Link
-                href="/materials"
+                href="/catalogue"
                 onClick={() => setMobileOpen(false)}
                 className="flex items-center gap-2 rounded-xl px-3 py-3 text-base font-semibold text-ink-900 hover:bg-ink-50"
               >
-                <LayoutGrid size={18} /> Explore Materials
+                <LayoutGrid size={18} /> Explore Catalogue
               </Link>
               <Link
-                href="/materials?featured=true"
+                href="/deals"
                 onClick={() => setMobileOpen(false)}
                 className="flex items-center gap-2 rounded-xl px-3 py-3 text-base font-semibold text-ink-900 hover:bg-ink-50"
               >
-                <Tag size={18} /> Deals
+                <Tag size={18} /> Deals Around You
               </Link>
               <Link
                 href="/sell-surplus"
@@ -213,6 +222,13 @@ export function FloatingNavbar() {
               >
                 <Handshake size={18} /> Trusted Suppliers
               </Link>
+              <Link
+                href="/account"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center gap-2 rounded-xl px-3 py-3 text-base font-semibold text-ink-900 hover:bg-ink-50"
+              >
+                <UserRound size={18} /> My Account
+              </Link>
 
               <div className="my-3 h-px bg-ink-100" />
 
@@ -223,7 +239,7 @@ export function FloatingNavbar() {
                 {categories.slice(0, 8).map((c) => (
                   <Link
                     key={c.id}
-                    href={`/materials/${c.slug}`}
+                    href={`/catalogue/${c.slug}`}
                     onClick={() => setMobileOpen(false)}
                     className="rounded-xl px-3 py-2.5 text-sm font-medium text-ink-700 hover:bg-ink-50"
                   >

@@ -2,15 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Heart, Home, LayoutGrid, ShoppingCart, User } from "lucide-react";
+import { Heart, Home, LayoutGrid, Tag, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const tabs = [
   { label: "Home", href: "/", icon: Home },
-  { label: "Explore", href: "/materials", icon: LayoutGrid },
+  { label: "Explore", href: "/catalogue", icon: LayoutGrid },
+  { label: "Deals", href: "/deals", icon: Tag },
   { label: "Wishlist", href: "/wishlist", icon: Heart },
-  { label: "Cart", href: "/cart", icon: ShoppingCart },
-  { label: "Account", href: "/login", icon: User },
+  { label: "Account", href: "/account", icon: User },
 ];
 
 export function MobileBottomNav() {
