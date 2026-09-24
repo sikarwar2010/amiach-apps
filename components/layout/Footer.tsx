@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
-import { WarehouseMark } from "@/components/brand/WarehouseMark";
+import { BrandLogo } from "@/components/brand/BrandLogo";
 
 const columns = [
   {
@@ -55,12 +55,10 @@ export function Footer() {
       <div className="container-page">
         <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:grid-cols-7">
           <div className="col-span-2">
-            <Link href="/" className="flex items-center gap-2">
-              <WarehouseMark size={34} className="shrink-0 text-brand-800" />
-              <span className="text-lg font-extrabold tracking-tight text-ink-900">
-                MaalGodaam<span className="text-accent-600">.com</span>
-              </span>
+            <Link href="/" aria-label="Maalgodaam.com home" className="inline-block">
+              <BrandLogo height={34} />
             </Link>
+            <div className="mt-3"><BrandLogo variant="tagline" height={14} /></div>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-500">
               India&apos;s marketplace for quality surplus building and interior
               materials — connecting buyers with trusted suppliers. Build more

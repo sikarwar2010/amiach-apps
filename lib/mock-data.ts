@@ -29,6 +29,7 @@ export const categoryPhotoIds: Record<string, string[]> = {
   "building-materials": ["photo-1560435650-7ec2e17ba926", "photo-1666219462105-2909c2d72d01", "photo-1669170930713-f7c778496177"],
   "home-improvement": ["photo-1645651964715-d200ce0939cc", "photo-1606676539940-12768ce0e762", "photo-1540103711724-ebf833bde8d1"],
   "commercial-interiors": ["photo-1715593949273-09009558300a", "photo-1706074797611-a02f9ed06439", "photo-1646153114001-495dfb56506d"],
+  electronics: ["photo-1635335874521-7987db781153", "photo-1601462904263-f2fa0c851cb9", "photo-1473831818960-c89731aabc3e"],
 };
 
 function categoryImages(categoryId: string, w = 900, h = 700): string[] {
@@ -38,7 +39,7 @@ function categoryImages(categoryId: string, w = 900, h = 700): string[] {
 // Initials-based placeholder logos — swap for real supplier logos once
 // suppliers upload their own branding.
 const avatar = (name: string) =>
-  `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=1F4D3A&color=FFFFFF&size=200&bold=true&font-size=0.36`;
+  `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=173C8A&color=FFFFFF&size=200&bold=true&font-size=0.36`;
 
 export const categories: Category[] = [
   { id: "tiles", slug: "tiles", name: "Tiles", descriptor: "Premium surfaces. Exceptional value.", listingCount: 1840, imageUrl: categoryImages("tiles")[0] },
@@ -54,6 +55,16 @@ export const categories: Category[] = [
   { id: "building-materials", slug: "building-materials", name: "Building Materials", descriptor: "Core construction supplies.", listingCount: 730, imageUrl: categoryImages("building-materials")[0] },
   { id: "home-improvement", slug: "home-improvement", name: "Home Improvement", descriptor: "Everyday upgrade essentials.", listingCount: 385, imageUrl: categoryImages("home-improvement")[0] },
   { id: "commercial-interiors", slug: "commercial-interiors", name: "Commercial Interiors", descriptor: "Office & retail fit-out materials.", listingCount: 268, imageUrl: categoryImages("commercial-interiors")[0] },
+  {
+    id: "electronics",
+    slug: "electronics",
+    name: "Electronics & Electricals",
+    descriptor: "Wiring, switchgear, fans and smart fittings.",
+    listingCount: 540,
+    imageUrl: categoryImages("electronics")[0],
+    subcategories: ["Switches & Sockets", "MCBs & Distribution Boards", "Wires & Cables", "Fans & Ventilation", "LED Drivers & Controls", "Smart Home Devices", "Water Heaters & Geysers", "CCTV & Security"],
+    specFields: ["Brand", "Model number", "Voltage / rating", "Warranty remaining", "Certification (ISI / BIS)", "Working condition"],
+  },
 ];
 
 export const locations: Location[] = [
@@ -540,6 +551,35 @@ export const listings: MaterialListing[] = [
     dateAdded: daysAgo(4),
     featured: true,
     wishlistCount: 41,
+  },
+  {
+    id: "lot-mcb-boards-300",
+    slug: "mcb-distribution-boards-300-pieces",
+    title: "MCB & Distribution Boards",
+    brand: "Legrand",
+    categoryId: "electronics",
+    subcategory: "MCBs & Distribution Boards",
+    condition: "overstock",
+    images: categoryImages("electronics"),
+    quantity: 300,
+    unit: "piece",
+    minOrderQuantity: 20,
+    locationId: "noida",
+    supplierId: "buildright-hardware",
+    dealType: "request-quote",
+    marketValue: 690000,
+    price: 372000,
+    logisticsMethods: ["transport-arranged", "self-pickup"],
+    description:
+      "Overstock ISI-certified MCBs and 8-way distribution boards from a cancelled commercial electrification order. New, sealed cartons.",
+    specifications: [
+      { label: "Rating", value: "6A – 63A, 240V" },
+      { label: "Certification", value: "ISI / BIS" },
+      { label: "Warranty", value: "Manufacturer warranty transferable" },
+    ],
+    packaging: "Sealed cartons of 12",
+    dateAdded: daysAgo(3),
+    wishlistCount: 11,
   },
 ];
 

@@ -7,6 +7,7 @@ import {
   Layers,
   PaintBucket,
   Sofa,
+  Zap,
 } from "lucide-react";
 import { categories } from "@/lib/mock-data";
 import { formatNumber } from "@/lib/utils";
@@ -18,11 +19,12 @@ const categoryIcons: Record<string, typeof LayoutGrid> = {
   sanitaryware: Droplet,
   plywood: Layers,
   "interior-walls": PaintBucket,
+  electronics: Zap,
 };
 
 // The five headline categories, shown as an angled, interlocking panel
 // strip — the wide-format editorial layout from the brand reference.
-const featured = ["tiles", "furniture", "sanitaryware", "plywood", "interior-walls"];
+const featured = ["tiles", "furniture", "sanitaryware", "plywood", "interior-walls", "electronics"];
 
 export function CategoryGrid() {
   const featuredCategories = featured

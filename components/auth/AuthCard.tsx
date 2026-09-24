@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { WarehouseMark } from "@/components/brand/WarehouseMark";
+import { BrandLogo } from "@/components/brand/BrandLogo";
 
 export function AuthCard({
   title,
@@ -15,11 +15,8 @@ export function AuthCard({
   return (
     <main className="flex min-h-screen items-center justify-center px-4 pb-16 pt-28 sm:pt-32">
       <div className="w-full max-w-md rounded-4xl border border-ink-100 bg-white p-8 shadow-soft-sm sm:p-10">
-        <Link href="/" className="flex items-center gap-2">
-          <WarehouseMark size={34} className="shrink-0 text-brand-800" />
-          <span className="text-lg font-extrabold tracking-tight text-ink-900">
-            MaalGodaam<span className="text-accent-600">.com</span>
-          </span>
+        <Link href="/" aria-label="Maalgodaam.com home" className="inline-block">
+          <BrandLogo height={32} />
         </Link>
 
         <h1 className="mt-6 text-2xl font-extrabold tracking-tight text-ink-900">{title}</h1>

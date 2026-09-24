@@ -3,6 +3,8 @@ import { Manrope } from "next/font/google";
 import "./globals.css";
 import { FloatingNavbar } from "@/components/layout/FloatingNavbar";
 import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
+import { ClerkProvider } from "@clerk/nextjs";
+import { clerkEnabled } from "@/lib/auth/config";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -37,6 +39,7 @@ export const metadata: Metadata = {
     siteName: "MaalGodaam.com",
     type: "website",
     locale: "en_IN",
+    images: [{ url: "/brand/logo-full.jpg", width: 1600, height: 783, alt: "Maalgodaam.com — Surplus माल देगा दाम" }],
   },
   robots: { index: true, follow: true },
 };
@@ -46,7 +49,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
+  const shell = (
     <html lang="en" className={manrope.variable}>
       <body className="min-h-screen bg-ink-25 font-sans text-ink-900 antialiased">
         <FloatingNavbar />
@@ -54,5 +57,20 @@ export default function RootLayout({
         <MobileBottomNav />
       </body>
     </html>
+  );
+
+  // ClerkProvider is only mounted when keys are configured (see lib/auth/config.ts).
+  return clerkEnabled ? (
+    <ClerkProvider
+      signInUrl="/login"
+      signUpUrl="/register"
+      appearance={{
+        variables: { colorPrimary: "#173C8A", colorText: "#1A1713", fontFamily: "var(--font-manrope), system-ui, sans-serif", borderRadius: "0.875rem" },
+      }}
+    >
+      {shell}
+    </ClerkProvider>
+  ) : (
+    shell
   );
 }

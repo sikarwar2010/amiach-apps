@@ -46,6 +46,9 @@ export interface Category {
   listingCount: number;
   imageUrl: string;
   parentId?: string | null;
+  subcategories?: string[];
+  /** Attribute names suppliers fill in when listing in this category. */
+  specFields?: string[];
 }
 
 export interface Supplier {

@@ -12,19 +12,29 @@ const config: Config = {
         sans: ["var(--font-manrope)", "system-ui", "sans-serif"],
       },
       colors: {
-        // Deep forest green — brand identity, navigation, trust, sustainability.
+        // Brand navy — sampled from the Maalgodaam logo. Identity, navigation, trust.
         brand: {
+          50: "#EEF3FC",
+          100: "#DCE6F8",
+          200: "#B8CBF0",
+          300: "#88A8E4",
+          400: "#4C7BDC",
+          500: "#2A5FCB",
+          600: "#1E4CAA",
+          700: "#173C8A",
+          800: "#122E6E",
+          900: "#0E2354",
+          950: "#091733",
+        },
+        // Leaf green — reserved for sustainability / eco messaging only.
+        leaf: {
           50: "#F0F6F2",
           100: "#DBEAE0",
           200: "#B4D3BE",
-          300: "#87B497",
-          400: "#5A9271",
           500: "#3B7355",
-          600: "#2A5C42",
           700: "#1F4D3A",
           800: "#193C2E",
           900: "#132E23",
-          950: "#0B1D16",
         },
         // Warm orange — CTAs, price/value, active states, selected filters.
         accent: {

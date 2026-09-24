@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Boxes, Building2, CheckCircle2, FileText } from "lucide-react";
-import { categories } from "@/lib/mock-data";
+import { useAllCategories } from "@/lib/services/categoryService";
 import { conditionLabels } from "@/lib/labels";
 import type { ConditionType } from "@/lib/types";
 import { Button } from "@/components/ui/Button";
@@ -37,6 +37,7 @@ function SectionHeader({
 }
 
 export function SellSurplusForm() {
+  const categories = useAllCategories();
   const [submitted, setSubmitted] = useState(false);
 
   if (submitted) {

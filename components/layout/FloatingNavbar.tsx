@@ -20,7 +20,9 @@ import { cn } from "@/lib/utils";
 import { categories } from "@/lib/mock-data";
 import { Button } from "@/components/ui/Button";
 import { SmartSearch } from "@/components/home/SmartSearch";
-import { WarehouseMark } from "@/components/brand/WarehouseMark";
+import { BrandLogo } from "@/components/brand/BrandLogo";
+import { useAppAuth } from "@/lib/auth/client";
+import { dashboardPathFor } from "@/lib/auth/types";
 
 const navLinks = [
   { label: "Explore", href: "/catalogue" },
@@ -34,6 +36,10 @@ export function FloatingNavbar() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [categoriesOpen, setCategoriesOpen] = useState(false);
+  const auth = useAppAuth();
+  const signedIn = auth.isLoaded && auth.isSignedIn;
+  const accountHref = signedIn ? dashboardPathFor(auth.user?.role) : "/login";
+  const accountLabel = signedIn ? "Dashboard" : "Sign In";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -58,11 +64,8 @@ export function FloatingNavbar() {
             scrolled ? "h-14 shadow-float" : "h-[4.5rem] shadow-soft"
           )}
         >
-          <Link href="/" className="flex shrink-0 items-center gap-2 pl-1">
-            <WarehouseMark size={34} className="shrink-0 text-brand-800" />
-            <span className="text-lg font-extrabold tracking-tight text-ink-900">
-              MaalGodaam<span className="text-accent-600">.com</span>
-            </span>
+          <Link href="/" aria-label="Maalgodaam.com home" className="flex shrink-0 items-center pl-1">
+            <BrandLogo height={scrolled ? 26 : 30} priority className="transition-all duration-300" />
           </Link>
 
           <nav className="hidden items-center gap-1 xl:flex">
@@ -101,7 +104,7 @@ export function FloatingNavbar() {
               <Link
                 key={link.label}
                 href={link.href}
-                className="rounded-full px-3.5 py-2 text-sm font-medium text-ink-700 transition-colors hover:bg-ink-100 hover:text-ink-900"
+                className="whitespace-nowrap rounded-full px-3.5 py-2 text-sm font-medium text-ink-700 transition-colors hover:bg-ink-100 hover:text-ink-900"
               >
                 {link.label}
               </Link>
@@ -119,10 +122,10 @@ export function FloatingNavbar() {
             <Link
               href="/deals"
               aria-label="Browse deals by location"
-              className="hidden h-10 items-center gap-1.5 rounded-full px-3 text-sm font-medium text-ink-600 transition-colors hover:bg-ink-100 md:flex"
+              className="hidden h-10 items-center gap-1.5 whitespace-nowrap rounded-full px-3 text-sm font-medium text-ink-600 transition-colors hover:bg-ink-100 md:flex"
             >
               <MapPin size={16} />
-              All Locations
+              <span className="hidden 2xl:inline">All Locations</span>
             </Link>
             <Link
               href="/wishlist"
@@ -147,10 +150,10 @@ export function FloatingNavbar() {
               <UserRound size={18} />
             </Link>
             <Link
-              href="/login"
-              className="hidden rounded-full px-3.5 py-2 text-sm font-medium text-ink-700 transition-colors hover:bg-ink-100 xl:inline-flex"
+              href={accountHref}
+              className="hidden whitespace-nowrap rounded-full px-3.5 py-2 text-sm font-medium text-ink-700 transition-colors hover:bg-ink-100 xl:inline-flex"
             >
-              Sign In
+              {accountLabel}
             </Link>
             <Button href="/post-requirement" size="sm" className="hidden xl:inline-flex">
               Post Requirement
@@ -253,8 +256,8 @@ export function FloatingNavbar() {
               <Button href="/post-requirement" onClick={() => setMobileOpen(false)}>
                 Post Requirement
               </Button>
-              <Button href="/login" variant="outline" onClick={() => setMobileOpen(false)}>
-                Sign In
+              <Button href={accountHref} variant="outline" onClick={() => setMobileOpen(false)}>
+                {accountLabel}
               </Button>
             </div>
           </div>
